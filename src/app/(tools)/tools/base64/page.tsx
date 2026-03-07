@@ -8,29 +8,22 @@ import { encodeBase64, decodeBase64 } from "@/lib/utils";
 export default function Base64Page() {
     const [mode, setMode] = useState<"encode" | "decode">("encode");
     const [input, setInput] = useState("");
-    const [error, setError] = useState<string | null>(null);
 
-    const output = (() => {
-        if (!input.trim()) {
-            setError(null);
-            return "";
-        }
+    const { output, error } = (() => {
+        if (!input.trim()) return { output: "", error: null };
+
         if (mode === "encode") {
             const result = encodeBase64(input);
-            if (!result && input) {
-                setError("Failed to encode input.");
-                return "";
-            }
-            setError(null);
-            return result;
+            return {
+                output: result || "",
+                error: result ? null : "Failed to encode input."
+            };
         } else {
             const result = decodeBase64(input);
-            if (!result && input) {
-                setError("Invalid Base64 string. Check your input.");
-                return "";
-            }
-            setError(null);
-            return result;
+            return {
+                output: result || "",
+                error: result ? null : "Invalid Base64 string. Check your input."
+            };
         }
     })();
 
@@ -38,7 +31,6 @@ export default function Base64Page() {
         if (!output) return;
         setInput(output);
         setMode((prev) => (prev === "encode" ? "decode" : "encode"));
-        setError(null);
     };
 
     return (
@@ -62,14 +54,14 @@ export default function Base64Page() {
                     }}
                 >
                     <button
-                        onClick={() => { setMode("encode"); setError(null); }}
+                        onClick={() => { setMode("encode"); }}
                         className={`btn btn-sm ${mode === "encode" ? "btn-primary" : "btn-ghost"}`}
                         style={{ borderRadius: "var(--radius-sm)" }}
                     >
                         Encode
                     </button>
                     <button
-                        onClick={() => { setMode("decode"); setError(null); }}
+                        onClick={() => { setMode("decode"); }}
                         className={`btn btn-sm ${mode === "decode" ? "btn-primary" : "btn-ghost"}`}
                         style={{ borderRadius: "var(--radius-sm)" }}
                     >
@@ -100,7 +92,7 @@ export default function Base64Page() {
                             {mode === "encode" ? "Plain Text" : "Base64 String"}
                         </label>
                         <button
-                            onClick={() => { setInput(""); setError(null); }}
+                            onClick={() => { setInput(""); }}
                             className="btn btn-ghost btn-sm"
                         >
                             Clear
@@ -110,7 +102,7 @@ export default function Base64Page() {
                         id="base64-input"
                         className="input"
                         value={input}
-                        onChange={(e) => { setInput(e.target.value); setError(null); }}
+                        onChange={(e) => { setInput(e.target.value); }}
                         placeholder={
                             mode === "encode"
                                 ? "Enter text to encode to Base64..."
