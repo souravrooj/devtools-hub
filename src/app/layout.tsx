@@ -31,27 +31,42 @@ export const metadata: Metadata = {
     "dev utilities",
     "web tools",
   ],
-  authors: [{ name: "DevTools Hub" }],
-  creator: "DevTools Hub",
+  authors: [{ name: "Sourav Rooj" }],
+  creator: "Sourav Rooj",
+  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "https://devtools-hub-pi-five.vercel.app"),
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: process.env.NEXT_PUBLIC_APP_URL,
+    url: "/",
     siteName: "DevTools Hub",
     title: "DevTools Hub — Developer Utilities in One Place",
-    description:
-      "A fast, free collection of developer tools. No login required.",
+    description: "A fast, free collection of developer tools. No login required.",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "DevTools Hub — All your developer utilities in one place",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "DevTools Hub",
     description: "A fast, free collection of developer tools.",
+    creator: "@souravrooj",
+    images: ["/og-image.png"],
   },
   robots: { index: true, follow: true },
   icons: {
-    icon: "/logo.png",
+    icon: [
+      { url: "/logo.png" },
+      { url: "/logo.png", sizes: "16x16", type: "image/png" },
+      { url: "/logo.png", sizes: "32x32", type: "image/png" },
+    ],
     apple: "/logo.png",
   },
+  manifest: "/manifest.webmanifest",
 };
 
 export default function RootLayout({
