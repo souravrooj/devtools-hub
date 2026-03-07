@@ -148,18 +148,18 @@
 
 ---
 
-## 🔮 Phase 5 — v2.0 Future Tools (PLANNED)
+## ✅ Phase 5 — v2.0 Tools (DONE)
 
-| Tool | Category | Status |
-|------|----------|--------|
-| Regex Tester | Developer | 🔮 |
-| UUID Generator | Developer | 🔮 |
-| Timestamp Converter | Developer | 🔮 |
-| Text Diff Checker | Text | 🔮 |
-| URL Encoder / Decoder | Encoding | 🔮 |
-| Lorem Ipsum Generator | Text | 🔮 |
-| HTML Preview | Developer | 🔮 |
-| Code Formatter | Formatting | 🔮 |
+| Tool | Category | Status | Notes |
+|------|----------|--------|-------|
+| Regex Tester | Developer | ✅ | Live highlighting, flags, group captures |
+| UUID Generator | Developer | ✅ | v4, bulk generation, case/hyphen options |
+| Timestamp Converter | Developer | ✅ | Live clock, auto-conversion, ISO/UTC/Local |
+| Text Diff Checker | Text | ✅ | Line-by-line comparison with additions/deletions |
+| URL Encoder / Decoder | Encoding | ✅ | Instant processing with swap utility |
+| Lorem Ipsum Generator | Text | ✅ | Paragraphs/Sentences/Words, custom counts |
+| HTML Preview | Developer | ✅ | Real-time sandboxed iframe preview |
+| Code Formatter | Formatting | ✅ | JS/CSS/HTML beautifier with indent options |
 
 ---
 
@@ -184,8 +184,8 @@ Phase 1 — Setup          █████████████████�
 Phase 2 — Core UI        ████████████████████ 100%
 Phase 3 — Tool Pages     ████████████████████ 100%
 Phase 4 — Deployment     ████████████████████ 100%
-Phase 5 — v2 Tools       ░░░░░░░░░░░░░░░░░░░░   0%
+Phase 5 — v2 Tools       ████████████████████ 100%
 Phase 6 — Advanced       ░░░░░░░░░░░░░░░░░░░░   0%
 ```
 
-**Total: ~67% complete (v1.0 is 100% complete)**
+**Total: ~84% complete (v1 & v2 are 100% complete)**
