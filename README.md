@@ -170,10 +170,10 @@ npm install
 Copy the example environment file and fill in your values:
 
 ```bash
-cp .env.example .env.local
+cp .env.example .env
 ```
 
-Then open `.env.local` and add your actual values. See [Environment Variables](#-environment-variables) below for details.
+Open `.env` and add your actual values. See [Environment Variables](#-environment-variables) below for details.
 
 ### 4. Run the Development Server
 
@@ -190,7 +190,7 @@ The page reloads automatically as you edit files.
 
 All environment variables are documented in [`.env.example`](.env.example).
 
-> ⚠️ **Never commit `.env.local` to Git.** It is already listed in `.gitignore`.
+> ⚠️ **Never commit `.env` to Git.** It is already listed in `.gitignore`.
 
 | Variable | Required | Description |
 |----------|----------|-------------|

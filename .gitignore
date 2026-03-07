@@ -30,8 +30,12 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files (.env.example is committed; all others are private)
-.env*
+# env files (.env.example is committed; your private .env is ignored)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 !.env.example
 
 # vercel
