@@ -137,6 +137,10 @@
 | Global error handler | ✅ | `error.tsx` — catches unhandled errors with "Try Again" / "Go Home" |
 | 404 Not Found page | ✅ | Custom gradient 404 with "Back to Home" button |
 | API route (`/api/tools`) | ✅ | Returns all tools, categories, and counts as JSON |
+| Robots & Sitemap | ✅ | `robots.ts` and `sitemap.ts` (Next.js 16 metadata routes) |
+| Usage Tracking | ✅ | API increments `viewCount` in MongoDB on tool page load |
+| Brand Assets | ✅ | Generated logo, favicon, and apple-touch-icon (`/logo.png`) |
+| License | ✅ | Added MIT License |
 | Cross-browser testing | ⏳ | Chrome, Firefox, Edge, Safari |
 | Mobile testing | ⏳ | iOS, Android |
 | Performance audit (Lighthouse) | ⏳ | Target score ≥ 90 |

@@ -47,6 +47,7 @@ export default function PasswordGeneratorPage() {
 
     return (
         <ToolPageLayout
+            id="password-generator"
             title="Password Generator"
             description="Generate cryptographically secure passwords with customizable options."
             icon="🔐"

@@ -48,6 +48,10 @@ export const metadata: Metadata = {
     description: "A fast, free collection of developer tools.",
   },
   robots: { index: true, follow: true },
+  icons: {
+    icon: "/logo.png",
+    apple: "/logo.png",
+  },
 };
 
 export default function RootLayout({

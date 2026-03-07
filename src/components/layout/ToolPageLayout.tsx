@@ -1,8 +1,12 @@
+"use client";
+
+import { useEffect } from "react";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import ErrorBoundary from "@/components/ui/ErrorBoundary";
 
 interface ToolPageLayoutProps {
+    id: string; // Add ID for tracking
     title: string;
     description: string;
     icon: string;
@@ -10,11 +14,22 @@ interface ToolPageLayoutProps {
 }
 
 export default function ToolPageLayout({
+    id,
     title,
     description,
     icon,
     children,
 }: ToolPageLayoutProps) {
+    // Usage tracking
+    useEffect(() => {
+        if (!id) return;
+
+        // Use a simple fetch to track usage
+        fetch(`/api/tools/${id}/use`, { method: "POST" })
+            .then(res => res.json())
+            .catch(err => console.error(`[Usage] Failed to track ${id}:`, err));
+    }, [id]);
+
     return (
         <div
             style={{

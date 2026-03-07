@@ -45,17 +45,20 @@ export default function Header() {
                             style={{
                                 width: "34px",
                                 height: "34px",
-                                borderRadius: "10px",
-                                background: "linear-gradient(135deg, var(--accent), #8b5cf6)",
+                                borderRadius: "8px",
+                                overflow: "hidden",
                                 display: "flex",
                                 alignItems: "center",
                                 justifyContent: "center",
-                                fontSize: "18px",
                                 flexShrink: 0,
-                                boxShadow: "0 2px 8px rgb(99 102 241 / 0.3)",
+                                boxShadow: "0 2px 8px rgb(99 102 241 / 0.2)",
                             }}
                         >
-                            🧰
+                            <img
+                                src="/logo.png"
+                                alt="DevTools Hub"
+                                style={{ width: "100%", height: "100%", objectFit: "contain" }}
+                            />
                         </div>
                         <div>
                             <span

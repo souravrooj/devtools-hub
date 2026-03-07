@@ -51,6 +51,7 @@ export default function MarkdownPreviewPage() {
 
     return (
         <ToolPageLayout
+            id="markdown-preview"
             title="Markdown Preview"
             description="Write Markdown and see a live rendered preview alongside your text."
             icon="📝"

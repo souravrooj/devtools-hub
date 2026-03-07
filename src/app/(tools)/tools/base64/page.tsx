@@ -43,6 +43,7 @@ export default function Base64Page() {
 
     return (
         <ToolPageLayout
+            id="base64"
             title="Base64 Encoder / Decoder"
             description="Encode plain text to Base64 or decode Base64 back to readable text."
             icon="🔄"

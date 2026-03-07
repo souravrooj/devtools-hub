@@ -42,6 +42,7 @@ export default function ColorPalettePage() {
 
     return (
         <ToolPageLayout
+            id="color-palette"
             title="Color Palette Generator"
             description="Generate beautiful random color palettes with hex codes ready to copy."
             icon="🎨"

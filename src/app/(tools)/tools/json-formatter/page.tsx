@@ -53,6 +53,7 @@ export default function JsonFormatterPage() {
 
     return (
         <ToolPageLayout
+            id="json-formatter"
             title="JSON Formatter"
             description="Paste raw JSON and get a beautifully formatted, validated version."
             icon="🧱"
