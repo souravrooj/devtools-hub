@@ -126,14 +126,17 @@
 
 ---
 
-## ⏳ Phase 4 — Polish & Deployment (PENDING)
+## 🔄 Phase 4 — Polish & Deployment (IN PROGRESS)
 
 | Task | Status | Notes |
 |------|--------|-------|
 | SEO meta tags (root layout) | ✅ | Open Graph, Twitter Card, keywords, robots |
-| Loading states / skeletons | ⏳ | |
-| Error boundary components | ⏳ | |
-| 404 Not Found page | ⏳ | |
+| Per-tool SEO metadata | ✅ | Each tool page has its own title, description, keywords, OG tags via layout.tsx |
+| Loading states / skeletons | ✅ | Shimmer skeleton for home page and tool pages (`loading.tsx`) |
+| Error boundary components | ✅ | `ErrorBoundary` class component wrapping all tool content |
+| Global error handler | ✅ | `error.tsx` — catches unhandled errors with "Try Again" / "Go Home" |
+| 404 Not Found page | ✅ | Custom gradient 404 with "Back to Home" button |
+| API route (`/api/tools`) | ✅ | Returns all tools, categories, and counts as JSON |
 | Cross-browser testing | ⏳ | Chrome, Firefox, Edge, Safari |
 | Mobile testing | ⏳ | iOS, Android |
 | Performance audit (Lighthouse) | ⏳ | Target score ≥ 90 |
@@ -179,9 +182,9 @@
 Phase 1 — Setup          ████████████████████ 100%
 Phase 2 — Core UI        ████████████████████ 100%
 Phase 3 — Tool Pages     ████████████████████ 100%
-Phase 4 — Deployment     ██░░░░░░░░░░░░░░░░░░  10%
+Phase 4 — Deployment     ████████████░░░░░░░░  60%
 Phase 5 — v2 Tools       ░░░░░░░░░░░░░░░░░░░░   0%
 Phase 6 — Advanced       ░░░░░░░░░░░░░░░░░░░░   0%
 ```
 
-**Total: ~55% complete**
+**Total: ~62% complete**

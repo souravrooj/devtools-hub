@@ -1,5 +1,6 @@
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import ErrorBoundary from "@/components/ui/ErrorBoundary";
 
 interface ToolPageLayoutProps {
     title: string;
@@ -78,7 +79,9 @@ export default function ToolPageLayout({
 
                     {/* Tool content */}
                     <div className="animate-fade-in" style={{ animationDelay: "0.05s" }}>
-                        {children}
+                        <ErrorBoundary fallbackTitle={`Error loading ${title}`}>
+                            {children}
+                        </ErrorBoundary>
                     </div>
                 </div>
             </main>
