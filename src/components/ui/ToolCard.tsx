@@ -1,7 +1,11 @@
 import Link from "next/link";
 import type { Tool } from "@/types";
+import { useFavorites } from "@/hooks/useFavorites";
 
 export default function ToolCard({ tool }: { tool: Tool }) {
+    const { isFavorite, toggleFavorite } = useFavorites();
+    const fav = isFavorite(tool.id);
+
     const categoryColors: Record<string, string> = {
         formatting: "badge-accent",
         encoding: "badge-accent",
@@ -39,6 +43,44 @@ export default function ToolCard({ tool }: { tool: Tool }) {
                 (e.currentTarget as HTMLElement).style.boxShadow = "var(--shadow-sm)";
             }}
         >
+            {/* Favorite Toggle */}
+            {tool.available && (
+                <button
+                    onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        toggleFavorite(tool.id);
+                    }}
+                    style={{
+                        position: "absolute",
+                        top: "12px",
+                        right: "12px",
+                        background: "none",
+                        border: "none",
+                        cursor: "pointer",
+                        padding: "8px",
+                        color: fav ? "#ef4444" : "var(--text-muted)",
+                        transition: "transform 0.2s, color 0.2s",
+                        zIndex: 10,
+                    }}
+                    onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.transform = "scale(1.2)")}
+                    onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.transform = "scale(1)")}
+                >
+                    <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 24 24"
+                        fill={fav ? "currentColor" : "none"}
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                    >
+                        <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.505 4.045 3 5.5L12 21l7-7Z" />
+                    </svg>
+                </button>
+            )}
+
             {/* Coming soon overlay */}
             {!tool.available && (
                 <div

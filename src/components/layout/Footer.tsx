@@ -54,11 +54,13 @@ export default function Footer() {
                 >
                     {[
                         { label: "Home", href: "/" },
+                        { label: "Analytics", href: "/stats" },
+                        { label: "API Docs", href: "/api-docs" },
+                        { label: "Contact Us", href: "/contact" },
+                        { label: "Sitemap", href: "/sitemap.xml" },
                         { label: "JSON Formatter", href: "/tools/json-formatter" },
                         { label: "Password Generator", href: "/tools/password-generator" },
-                        { label: "Markdown Preview", href: "/tools/markdown-preview" },
-                        { label: "Base64", href: "/tools/base64" },
-                        { label: "Color Palette", href: "/tools/color-palette" },
+                        { label: "UUID Generator", href: "/tools/uuid-generator" },
                     ].map((link) => (
                         <Link
                             key={link.href}

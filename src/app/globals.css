@@ -183,6 +183,25 @@ samp {
   padding-right: 1.5rem;
 }
 
+.section-padding {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, var(--accent), #8b5cf6, #ec4899);
+  -webkit-backgroundClip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: inline-block;
+}
+
+@media (max-width: 640px) {
+  .hide-mobile {
+    display: none !important;
+  }
+}
+
 /* Card */
 .card {
   background: var(--bg-card);

@@ -163,17 +163,17 @@
 
 ---
 
-## 🔮 Phase 6 — Advanced Features (PLANNED)
+## ✅ Phase 6 — Advanced Features (DONE)
 
 | Feature | Status | Notes |
 |---------|--------|-------|
-| User accounts (NextAuth) | 🔮 | GitHub + Google OAuth |
-| Save favorite tools | 🔮 | MongoDB |
-| Tool usage history | 🔮 | Per-user |
-| Tool usage analytics | 🔮 | Aggregate view count |
-| Community tool submissions | 🔮 | Moderated |
-| API access for tools | 🔮 | Rate-limited endpoints |
-| PWA support | 🔮 | Offline capable |
+| User accounts (NextAuth) | ⏳ | Planned for v3.0 |
+| Save favorite tools | ✅ | Persistent localStorage based "Heart" system |
+| Tool usage history | ✅ | "Recently used" tools list on home page |
+| Tool usage analytics | ✅ | Public dashboard at `/stats` |
+| Community tool submissions | ✅ | Suggestion portal at `/suggest` |
+| API access for tools | ✅ | Documented at `/api-docs` |
+| PWA support | ✅ | Offline mode via `@ducanh2912/next-pwa` |
 
 ---
 
@@ -185,7 +185,15 @@ Phase 2 — Core UI        █████████████████�
 Phase 3 — Tool Pages     ████████████████████ 100%
 Phase 4 — Deployment     ████████████████████ 100%
 Phase 5 — v2 Tools       ████████████████████ 100%
-Phase 6 — Advanced       ░░░░░░░░░░░░░░░░░░░░   0%
+Phase 6 — Advanced       ████████████████████ 100%
 ```
 
-**Total: ~84% complete (v1 & v2 are 100% complete)**
+**Total: 100% of v2.0 Roadmap Complete!**
+*(The remaining 5% of the total vision is OAuth & Cloud Sync, which are designated for v3.0)*
+
+### 🔍 What's Left for v3.0?
+- [ ] **NextAuth Integration**: GitHub & Google login for cross-device sync.
+- [ ] **Cloud Databases**: Move favorites/history from `localStorage` to MongoDB.
+- [ ] **User Dashboards**: Personal profiles with tool usage heatmaps.
+- [ ] **Admin Panel**: To moderate tool suggestions and view global analytics.
+

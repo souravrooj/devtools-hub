@@ -55,27 +55,23 @@ The platform is:
 
 ## 🛠️ Tools Included
 
-### v1.0 (Current)
+### 🚀 All Tools (v1.0 & v2.0)
 
-| Tool | Category | Description |
-|------|----------|-------------|
-| JSON Formatter | Formatting | Paste and format messy JSON with syntax highlighting |
-| Password Generator | Security | Generate strong passwords with custom options |
-| Markdown Preview | Developer | Live preview of Markdown content |
-| Base64 Encoder/Decoder | Encoding | Encode or decode text to/from Base64 |
-| Color Palette Generator | Design | Generate random accessible color palettes |
-
-### v2.0 (Planned)
-
-| Tool | Category | Description |
-|------|----------|-------------|
-| Regex Tester | Developer | Test regular expressions with live match highlighting |
-| UUID Generator | Developer | Generate UUIDs (v1, v4) |
-| Timestamp Converter | Developer | Convert Unix timestamps to readable dates |
-| Text Diff Checker | Text | Compare two blocks of text |
-| URL Encoder/Decoder | Encoding | Encode/decode URL components |
-| Lorem Ipsum Generator | Text | Generate placeholder text |
-| HTML Preview | Developer | Render raw HTML in a sandbox |
+| Tool | Category | Description | Status |
+|------|----------|-------------|--------|
+| JSON Formatter | Formatting | Format messy JSON with syntax highlighting | ✅ |
+| Code Formatter | Formatting | Beautify JS, CSS, and HTML code | ✅ |
+| Password Generator | Security | Generate strong passwords with custom options | ✅ |
+| Markdown Preview | Developer | Live preview of GitHub-flavored Markdown | ✅ |
+| Base64 Encoder/Decoder | Encoding | Encode or decode text to/from Base64 | ✅ |
+| URL Encoder/Decoder | Encoding | Encode/decode URL safe components | ✅ |
+| Regex Tester | Developer | Test regex with live highlighting | ✅ |
+| UUID Generator | Developer | Generate multiple UUIDs (v1, v4) | ✅ |
+| Timestamp Converter | Developer | Convert Unix timestamps to readable dates | ✅ |
+| Text Diff Checker | Text | High-performance line-by-line comparison | ✅ |
+| Lorem Ipsum Generator | Text | Generate placeholder text with custom counts | ✅ |
+| HTML Preview | Developer | Real-time sandboxed HTML/CSS rendering | ✅ |
+| Color Palette Generator | Design | Generate random accessible color palettes | ✅ |
 
 ---
 
@@ -84,13 +80,12 @@ The platform is:
 | Layer | Technology | Purpose |
 |-------|-----------|---------|
 | Framework | [Next.js 16](https://nextjs.org/) | App Router, SSR, API routes |
-| Language | [TypeScript 5](https://typescriptlang.org/) | Type safety |
-| Styling | [Tailwind CSS 4](https://tailwindcss.com/) | Utility-first styling |
+| Tooling | [js-beautify](https://github.com/beautify-web/js-beautify) | Code formatting engine |
+| Comparison | [diff](https://github.com/kpdecker/jsdiff) | Text diffing algorithm |
+| PWA | [next-pwa](https://github.com/ducanh2912/next-pwa) | Offline support (Manifest & Icons) |
 | Database | [MongoDB Atlas](https://www.mongodb.com/atlas) | Cloud document database |
 | ORM | [Mongoose](https://mongoosejs.com/) | MongoDB schema modeling |
-| Markdown | [Marked](https://marked.js.org/) | Markdown rendering |
 | Deployment | [Vercel](https://vercel.com/) | Hosting & CI/CD |
-| Package Manager | [npm](https://npmjs.com/) | Dependency management |
 
 ---
 
@@ -240,19 +235,11 @@ All environment variables are documented in [`.env.example`](.env.example).
 
 ## 🗺️ Roadmap
 
-- [x] Project scaffolding & setup
-- [x] Home page with tool grid & search
-- [x] JSON Formatter tool
-- [x] Password Generator tool
-- [x] Markdown Preview tool
-- [x] Base64 Encoder/Decoder tool
-- [x] Color Palette Generator tool
-- [x] Dark / Light mode toggle
-- [x] Responsive layout
-- [x] Project documentation (PROGRESS, USER_GUIDE, ARCHITECTURE)
-- [x] MongoDB integration for tracking
-- [x] Deploy to Vercel
-- [ ] v2.0 tools (Regex, UUID, Timestamp, etc.)
+- [x] v2.0 tools (Regex, UUID, Timestamp)
+- [x] Advanced Features (Favorites, Recents, Stats)
+- [x] Community Portal (Suggest a Tool)
+- [x] Public API Documentation
+- [ ] v3.0 (User Accounts & Cloud Sync)
 
 ---
 
@@ -269,11 +256,25 @@ Contributions are welcome! To add a new tool or improvement:
 
 Please follow conventional commit messages and keep each PR focused on one feature.
 
+## 👨‍💻 Developer & Maintainer
+
+**Sourav Rooj**
+- 📧 **Email**: [souravrooj64@gmail.com](mailto:souravrooj64@gmail.com)
+- 📞 **Phone**: +91 7001014799
+- 🌐 **GitHub**: [github.com/souravrooj](https://github.com/souravrooj)
+- 📍 **Location**: India
+
+Have feedback, tool suggestions, or business inquiries? Feel free to reach out via the [Contact Us](https://devtools-hub.vercel.app/contact) page or directly via email.
+
 ---
 
-## 📄 License
+## 📜 License
 
-This project is licensed under the **MIT License**. See [LICENSE](LICENSE) for details.
+Distributed under the MIT License. See `LICENSE` for more information.
+
+---
+
+<p align="center">Made with ❤️ for developers by <a href="https://github.com/souravrooj">Sourav Rooj</a></p>
 
 ---
 

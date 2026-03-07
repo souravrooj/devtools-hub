@@ -1,24 +1,38 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import Link from "next/link";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import ToolCard from "@/components/ui/ToolCard";
 import SearchBar from "@/components/ui/SearchBar";
 import { TOOLS, CATEGORIES } from "@/data/tools";
+import { useFavorites } from "@/hooks/useFavorites";
+import { useRecentlyUsed } from "@/hooks/useRecentlyUsed";
 import type { ToolCategory } from "@/types";
 
 export default function HomePage() {
   const [search, setSearch] = useState("");
-  const [activeCategory, setActiveCategory] = useState<ToolCategory | "all">(
+  const [activeCategory, setActiveCategory] = useState<ToolCategory | "all" | "favorites">(
     "all"
   );
+  const { favorites } = useFavorites();
+  const { recents } = useRecentlyUsed();
+
+  const recentTools = useMemo(() => {
+    return recents
+      .map(id => TOOLS.find(t => t.id === id))
+      .filter((t): t is typeof TOOLS[0] => !!t);
+  }, [recents]);
 
   const filtered = useMemo(() => {
     let results = TOOLS;
 
-    // Category filter
-    if (activeCategory !== "all") {
+    // Favorites filter
+    if (activeCategory === "favorites") {
+      results = results.filter((t) => favorites.includes(t.id));
+    } else if (activeCategory !== "all") {
+      // Category filter
       results = results.filter((t) => t.category === activeCategory);
     }
 
@@ -39,7 +53,7 @@ export default function HomePage() {
     }
 
     return results;
-  }, [search, activeCategory]);
+  }, [search, activeCategory, favorites]);
 
   const available = filtered.filter((t) => t.available);
   const comingSoon = filtered.filter((t) => !t.available);
@@ -134,6 +148,37 @@ export default function HomePage() {
             >
               <SearchBar value={search} onChange={setSearch} />
             </div>
+
+            {/* Recently Used (Client only) */}
+            {recentTools.length > 0 && activeCategory === "all" && !search && (
+              <div
+                className="animate-fade-in"
+                style={{
+                  marginTop: "2rem",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  animationDelay: "100ms"
+                }}
+              >
+                <div style={{ fontSize: "0.75rem", fontWeight: 700, color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: "0.75rem" }}>
+                  Recently Used
+                </div>
+                <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap", justifyContent: "center" }}>
+                  {recentTools.map(tool => (
+                    <Link
+                      key={tool.id}
+                      href={tool.href}
+                      className="btn btn-ghost btn-sm"
+                      style={{ background: "var(--bg-muted)", borderRadius: "var(--radius-md)", padding: "0.5rem 0.75rem" }}
+                    >
+                      <span>{tool.icon}</span>
+                      <span style={{ fontSize: "0.8125rem" }}>{tool.name}</span>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         </section>
 
@@ -152,6 +197,13 @@ export default function HomePage() {
               className={`btn btn-sm ${activeCategory === "all" ? "btn-primary" : "btn-ghost"}`}
             >
               All Tools
+            </button>
+            <button
+              onClick={() => setActiveCategory("favorites")}
+              className={`btn btn-sm ${activeCategory === "favorites" ? "btn-primary" : "btn-ghost"}`}
+              style={{ color: favorites.length > 0 ? "#ef4444" : "inherit" }}
+            >
+              ❤️ Favorites {favorites.length > 0 && `(${favorites.length})`}
             </button>
             {CATEGORIES.map((cat) => (
               <button

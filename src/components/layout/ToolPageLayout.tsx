@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { useRecentlyUsed } from "@/hooks/useRecentlyUsed";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import ErrorBoundary from "@/components/ui/ErrorBoundary";
@@ -20,11 +21,18 @@ export default function ToolPageLayout({
     icon,
     children,
 }: ToolPageLayoutProps) {
+    const { trackUsage } = useRecentlyUsed();
+
     // Usage tracking
     useEffect(() => {
         if (!id) return;
 
-        // Use a simple fetch to track usage
+        // Client-side local history
+        if (id !== "suggest" && id !== "api-docs") {
+            trackUsage(id);
+        }
+
+        // Server-side global analytics
         fetch(`/api/tools/${id}/use`, { method: "POST" })
             .then(res => res.json())
             .catch(err => console.error(`[Usage] Failed to track ${id}:`, err));
