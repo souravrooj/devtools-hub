@@ -250,8 +250,8 @@ All environment variables are documented in [`.env.example`](.env.example).
 - [x] Dark / Light mode toggle
 - [x] Responsive layout
 - [x] Project documentation (PROGRESS, USER_GUIDE, ARCHITECTURE)
-- [ ] MongoDB integration for favorites
-- [ ] Deploy to Vercel
+- [x] MongoDB integration for tracking
+- [x] Deploy to Vercel
 - [ ] v2.0 tools (Regex, UUID, Timestamp, etc.)
 
 ---
@@ -279,6 +279,6 @@ This project is licensed under the **MIT License**. See [LICENSE](LICENSE) for d
 
 <div align="center">
 
-Built with ❤️ as a portfolio project · [Live Demo](#) · [Report a Bug](https://github.com/souravrooj/devtools-hub/issues)
+Built with ❤️ as a portfolio project · [Live Demo](https://devtools-hub-pi-five.vercel.app/) · [Report a Bug](https://github.com/souravrooj/devtools-hub/issues)
 
 </div>
