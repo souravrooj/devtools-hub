@@ -128,7 +128,11 @@ devtools-hub/
 │   │   └── index.ts          # Shared types (Tool, Category, etc.)
 │   └── data/                 # Static tool metadata & categories
 │       └── tools.ts          # Tool registry (title, route, category, icon)
-├── .env.local                # Local environment variables (not committed)
+├── docs/                     # Project documentation
+│   ├── PROGRESS.md           # Task tracker (done / pending)
+│   ├── USER_GUIDE.md         # End-user documentation
+│   └── ARCHITECTURE.md       # Technical architecture reference
+├── .env                      # Local environment variables (not committed)
 ├── .env.example              # Environment variable template (committed)
 ├── .gitignore                # Git ignored files
 ├── next.config.ts            # Next.js configuration
@@ -155,7 +159,7 @@ Make sure you have the following installed:
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/devtools-hub.git
+git clone https://github.com/souravrooj/devtools-hub.git
 cd devtools-hub
 ```
 
@@ -237,14 +241,15 @@ All environment variables are documented in [`.env.example`](.env.example).
 ## 🗺️ Roadmap
 
 - [x] Project scaffolding & setup
-- [ ] Home page with tool grid & search
-- [ ] JSON Formatter tool
-- [ ] Password Generator tool
-- [ ] Markdown Preview tool
-- [ ] Base64 Encoder/Decoder tool
-- [ ] Color Palette Generator tool
-- [ ] Dark / Light mode toggle
-- [ ] Responsive layout
+- [x] Home page with tool grid & search
+- [x] JSON Formatter tool
+- [x] Password Generator tool
+- [x] Markdown Preview tool
+- [x] Base64 Encoder/Decoder tool
+- [x] Color Palette Generator tool
+- [x] Dark / Light mode toggle
+- [x] Responsive layout
+- [x] Project documentation (PROGRESS, USER_GUIDE, ARCHITECTURE)
 - [ ] MongoDB integration for favorites
 - [ ] Deploy to Vercel
 - [ ] v2.0 tools (Regex, UUID, Timestamp, etc.)
@@ -274,6 +279,6 @@ This project is licensed under the **MIT License**. See [LICENSE](LICENSE) for d
 
 <div align="center">
 
-Built with ❤️ as a portfolio project · [Live Demo](#) · [Report a Bug](https://github.com/YOUR_USERNAME/devtools-hub/issues)
+Built with ❤️ as a portfolio project · [Live Demo](#) · [Report a Bug](https://github.com/souravrooj/devtools-hub/issues)
 
 </div>

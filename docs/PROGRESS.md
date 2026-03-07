@@ -47,69 +47,82 @@
 
 ---
 
-## 🔄 Phase 2 — Core UI & Home Page (IN PROGRESS)
+## ✅ Phase 2 — Core UI & Home Page (DONE)
 
 | Task | Status | Notes |
 |------|--------|-------|
-| Global CSS design system | 🔄 | Dark/light tokens, fonts, animations |
-| Root layout (`layout.tsx`) | 🔄 | Metadata, fonts, theme class |
-| Header component | 🔄 | Logo, nav, theme toggle |
-| Footer component | 🔄 | Links, copyright |
-| ToolCard component | 🔄 | Card for each tool in the grid |
-| Home page dashboard | 🔄 | Grid, search bar, category filter |
-| Responsive mobile layout | 🔄 | Mobile hamburger, stacked grid |
-| Theme toggle (dark/light) | 🔄 | Persisted to localStorage |
+| Global CSS design system | ✅ | Dark/light tokens, fonts, animations, utility classes |
+| Root layout (`layout.tsx`) | ✅ | Inter + JetBrains Mono fonts, SEO metadata, FOUC prevention |
+| Header component | ✅ | Sticky glassmorphism nav, logo, GitHub link, theme toggle, "All Tools" back btn |
+| Footer component | ✅ | Tool links, copyright, GitHub link |
+| ToolCard component | ✅ | Hover-lift, category badge, "Coming Soon" ribbon, staggered animation |
+| SearchBar component | ✅ | Icon, clear button, placeholder |
+| CopyButton component | ✅ | Animated "Copied!" feedback with auto-reset |
+| ToolPageLayout component | ✅ | Shared wrapper for all tool pages |
+| Home page dashboard | ✅ | Hero, gradient text, search, category tabs, tool grid, coming-soon section |
+| Responsive mobile layout | ✅ | Mobile grid stacking via CSS |
+| Theme toggle (dark/light) | ✅ | Persisted to localStorage, inline script for FOUC prevention |
 
 ---
 
-## ⏳ Phase 3 — Tool Pages (PENDING)
+## ✅ Phase 3 — Tool Pages (DONE)
 
-### 3.1 JSON Formatter
+### 3.1 JSON Formatter — `/tools/json-formatter`
 | Task | Status |
 |------|--------|
-| Tool page UI | ⏳ |
-| Parse & format JSON | ⏳ |
-| Syntax highlighting | ⏳ |
-| Invalid JSON error display | ⏳ |
-| Copy to clipboard | ⏳ |
-| Clear button | ⏳ |
+| Tool page UI | ✅ |
+| Parse & format JSON | ✅ |
+| Auto-format on paste | ✅ |
+| Invalid JSON error display | ✅ |
+| Copy to clipboard | ✅ |
+| Clear button | ✅ |
+| Split-pane layout (input/output) | ✅ |
+| Mobile responsive stacking | ✅ |
 
-### 3.2 Password Generator
+### 3.2 Password Generator — `/tools/password-generator`
 | Task | Status |
 |------|--------|
-| Tool page UI | ⏳ |
-| Options (length, uppercase, etc.) | ⏳ |
-| Crypto-secure generation | ⏳ |
-| Strength indicator | ⏳ |
-| Copy to clipboard | ⏳ |
+| Tool page UI | ✅ |
+| Options (length, uppercase, lowercase, numbers, symbols) | ✅ |
+| Crypto-secure generation (`crypto.getRandomValues`) | ✅ |
+| Strength indicator (Weak/Fair/Strong/Very Strong) | ✅ |
+| Regenerate button | ✅ |
+| Copy to clipboard | ✅ |
+| Auto-generate on option change | ✅ |
 
-### 3.3 Markdown Preview
+### 3.3 Markdown Preview — `/tools/markdown-preview`
 | Task | Status |
 |------|--------|
-| Tool page UI | ⏳ |
-| Split-pane editor/preview | ⏳ |
-| Live rendering with Marked | ⏳ |
-| Code block styling | ⏳ |
-| Copy output | ⏳ |
+| Tool page UI | ✅ |
+| Split-pane editor/preview | ✅ |
+| Live rendering with Marked | ✅ |
+| Code block styling | ✅ |
+| Copy Markdown source | ✅ |
+| Clear button | ✅ |
+| Default sample Markdown content | ✅ |
 
-### 3.4 Base64 Encoder / Decoder
+### 3.4 Base64 Encoder / Decoder — `/tools/base64`
 | Task | Status |
 |------|--------|
-| Tool page UI | ⏳ |
-| Encode mode | ⏳ |
-| Decode mode | ⏳ |
-| Error handling for invalid Base64 | ⏳ |
-| Copy to clipboard | ⏳ |
+| Tool page UI | ✅ |
+| Encode mode | ✅ |
+| Decode mode | ✅ |
+| Mode toggle (Encode/Decode) | ✅ |
+| Swap button (output → input) | ✅ |
+| Error handling for invalid Base64 | ✅ |
+| Copy to clipboard | ✅ |
 
-### 3.5 Color Palette Generator
+### 3.5 Color Palette Generator — `/tools/color-palette`
 | Task | Status |
 |------|--------|
-| Tool page UI | ⏳ |
-| Random palette generator | ⏳ |
-| Display HEX codes | ⏳ |
-| Copy hex on click | ⏳ |
-| Regenerate button | ⏳ |
-| Light/dark contrast label | ⏳ |
+| Tool page UI | ✅ |
+| Random palette generator (5 colors) | ✅ |
+| Display HEX codes | ✅ |
+| Click hex to copy | ✅ |
+| Lock/unlock individual colors | ✅ |
+| Regenerate button | ✅ |
+| Light/dark contrast label | ✅ |
+| CSS variables output | ✅ |
 
 ---
 
@@ -117,7 +130,7 @@
 
 | Task | Status | Notes |
 |------|--------|-------|
-| SEO meta tags for all pages | ⏳ | Open Graph, Twitter Card |
+| SEO meta tags (root layout) | ✅ | Open Graph, Twitter Card, keywords, robots |
 | Loading states / skeletons | ⏳ | |
 | Error boundary components | ⏳ | |
 | 404 Not Found page | ⏳ | |
@@ -164,11 +177,11 @@
 
 ```
 Phase 1 — Setup          ████████████████████ 100%
-Phase 2 — Core UI        ████░░░░░░░░░░░░░░░░  20%
-Phase 3 — Tool Pages     ░░░░░░░░░░░░░░░░░░░░   0%
-Phase 4 — Deployment     ░░░░░░░░░░░░░░░░░░░░   0%
+Phase 2 — Core UI        ████████████████████ 100%
+Phase 3 — Tool Pages     ████████████████████ 100%
+Phase 4 — Deployment     ██░░░░░░░░░░░░░░░░░░  10%
 Phase 5 — v2 Tools       ░░░░░░░░░░░░░░░░░░░░   0%
 Phase 6 — Advanced       ░░░░░░░░░░░░░░░░░░░░   0%
 ```
 
-**Total: ~17% complete**
+**Total: ~55% complete**
