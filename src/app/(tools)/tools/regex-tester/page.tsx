@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import ToolPageLayout from "@/components/layout/ToolPageLayout";
 
 export default function RegexTesterPage() {
@@ -14,46 +14,39 @@ export default function RegexTesterPage() {
         y: false,
     });
     const [testText, setTestText] = useState("");
-    const [error, setError] = useState<string | null>(null);
 
     const activeFlags = Object.entries(flags)
         .filter(([_, active]) => active)
         .map(([flag]) => flag)
         .join("");
 
-    const { matches, highlightedHtml } = (() => {
-        if (!pattern) return { matches: [], highlightedHtml: testText };
+    const results = useMemo(() => {
+        if (!pattern) return { matches: [], highlightedHtml: escape(testText), error: null };
 
         try {
             const re = new RegExp(pattern, activeFlags);
-            setError(null);
-
-            let result;
             const foundMatches = [];
 
-            // To prevent infinite loops with zero-length matches
-            let lastIndex = -1;
-
             if (activeFlags.includes("g")) {
-                while ((result = re.exec(testText)) !== null) {
-                    if (re.lastIndex === lastIndex) {
-                        re.lastIndex++; // Move forward if no progress
+                let match;
+                while ((match = re.exec(testText)) !== null) {
+                    foundMatches.push(match);
+                    // Prevent infinite loop on zero-length matches
+                    if (match[0].length === 0) {
+                        re.lastIndex++;
                     }
-                    lastIndex = re.lastIndex;
-                    foundMatches.push(result);
+                    if (re.lastIndex > testText.length) break;
                 }
             } else {
-                result = re.exec(testText);
-                if (result) foundMatches.push(result);
+                const match = re.exec(testText);
+                if (match) foundMatches.push(match);
             }
 
-            // Simple HTML highlighting (dangerouslySetInnerHTML)
-            // Note: This is a bit naive because it doesn't escape HTML in testText first.
-            // Let's escape first!
-            const escapedText = testText
-                .replace(/&/g, "&amp;")
-                .replace(/</g, "&lt;")
-                .replace(/>/g, "&gt;");
+            // Build highlighted HTML safely
+            const escape = (str: string) =>
+                str.replace(/&/g, "&amp;")
+                    .replace(/</g, "&lt;")
+                    .replace(/>/g, "&gt;");
 
             let currentPos = 0;
             let html = "";
@@ -62,25 +55,34 @@ export default function RegexTesterPage() {
                 const index = match.index;
                 const length = match[0].length;
 
+                // Index might be less than currentPos if regex behaves strangely
+                if (index < currentPos) return;
+
                 // Add text before match
-                html += escapedText.substring(currentPos, index);
+                html += escape(testText.substring(currentPos, index));
 
                 // Add highlighted match
-                const matchVal = escapedText.substring(index, index + length);
+                const matchVal = escape(testText.substring(index, index + length));
                 html += `<span class="regex-match" data-idx="${idx}">${matchVal}</span>`;
 
                 currentPos = index + length;
             });
 
             // Add remaining text
-            html += escapedText.substring(currentPos);
+            html += escape(testText.substring(currentPos));
 
-            return { matches: foundMatches, highlightedHtml: html };
+            return { matches: foundMatches, highlightedHtml: html, error: null };
         } catch (err: any) {
-            setError(err.message);
-            return { matches: [], highlightedHtml: testText };
+            return { matches: [], highlightedHtml: escape(testText), error: err.message };
         }
-    })();
+    }, [pattern, activeFlags, testText]);
+
+    // Helper to safely escape text for the error case
+    function escape(str: string) {
+        return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    }
+
+    const { matches, highlightedHtml, error } = results;
 
     const toggleFlag = (flag: keyof typeof flags) => {
         setFlags((prev) => ({ ...prev, [flag]: !prev[flag] }));
@@ -242,7 +244,7 @@ export default function RegexTesterPage() {
                                     gap: "0.75rem",
                                 }}
                             >
-                                {matches.slice(0, 5).map((m, i) => (
+                                {matches.slice(0, 5).map((m: RegExpExecArray, i: number) => (
                                     <div
                                         key={i}
                                         style={{
@@ -260,7 +262,7 @@ export default function RegexTesterPage() {
                                         </div>
                                         {m.length > 1 && (
                                             <div style={{ display: "flex", flexWrap: "wrap", gap: "0.25rem", marginTop: "0.5rem" }}>
-                                                {m.slice(1).map((group, gi) => (
+                                                {m.slice(1).map((group: string | undefined, gi: number) => (
                                                     <span
                                                         key={gi}
                                                         style={{
