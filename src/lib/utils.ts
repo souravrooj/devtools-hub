@@ -56,9 +56,13 @@ export function prettyJSON(value: unknown, indent = 2): string {
 
 /**
  * Encode a string to Base64.
+ * Node-safe fallback for SSR/Prerendering.
  */
 export function encodeBase64(text: string): string {
     try {
+        if (typeof btoa === "undefined") {
+            return Buffer.from(text, "utf-8").toString("base64");
+        }
         return btoa(unescape(encodeURIComponent(text)));
     } catch {
         return "";
@@ -67,9 +71,13 @@ export function encodeBase64(text: string): string {
 
 /**
  * Decode a Base64 string.
+ * Node-safe fallback for SSR/Prerendering.
  */
 export function decodeBase64(encoded: string): string {
     try {
+        if (typeof atob === "undefined") {
+            return Buffer.from(encoded, "base64").toString("utf-8");
+        }
         return decodeURIComponent(escape(atob(encoded)));
     } catch {
         return "";
@@ -108,7 +116,16 @@ export function generatePassword(options: {
     if (!charset) return "";
 
     const array = new Uint32Array(length);
-    crypto.getRandomValues(array);
+
+    // Safety check for SSR
+    if (typeof crypto !== "undefined" && crypto.getRandomValues) {
+        crypto.getRandomValues(array);
+    } else {
+        // Fallback for environments without crypto (though unlikely in modern Node)
+        for (let i = 0; i < length; i++) {
+            array[i] = Math.floor(Math.random() * 0xFFFFFFFF);
+        }
+    }
 
     return Array.from(array)
         .map((n) => charset[n % charset.length])

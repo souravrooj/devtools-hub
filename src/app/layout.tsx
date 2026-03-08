@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import { ToastProvider } from "@/components/ui/Toast";
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
+import { Suspense } from "react";
 import "./globals.css";
 
 const inter = Inter({
@@ -104,7 +107,15 @@ export default function RootLayout({
       </head>
       <body className={`${inter.variable} ${jetbrainsMono.variable} antialiased`}>
         <ToastProvider>
-          {children}
+          <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
+            <Suspense fallback={<div style={{ height: "64px", background: "rgba(0,0,0,0.05)" }} />}>
+              <Header />
+            </Suspense>
+            <main style={{ flex: 1 }}>
+              {children}
+            </main>
+            <Footer />
+          </div>
         </ToastProvider>
       </body>
     </html>

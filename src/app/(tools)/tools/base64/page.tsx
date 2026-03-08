@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import ToolPageLayout from "@/components/layout/ToolPageLayout";
 import CopyButton from "@/components/ui/CopyButton";
 import { encodeBase64, decodeBase64 } from "@/lib/utils";
@@ -9,23 +9,31 @@ export default function Base64Page() {
     const [mode, setMode] = useState<"encode" | "decode">("encode");
     const [input, setInput] = useState("");
 
-    const { output, error } = (() => {
-        if (!input.trim()) return { output: "", error: null };
-
-        if (mode === "encode") {
-            const result = encodeBase64(input);
-            return {
-                output: result || "",
-                error: result ? null : "Failed to encode input."
-            };
-        } else {
-            const result = decodeBase64(input);
-            return {
-                output: result || "",
-                error: result ? null : "Invalid Base64 string. Check your input."
-            };
+    const results = useMemo(() => {
+        if (typeof window === "undefined" || !input.trim()) {
+            return { output: "", error: null };
         }
-    })();
+
+        try {
+            if (mode === "encode") {
+                const result = encodeBase64(input);
+                return {
+                    output: result || "",
+                    error: result ? null : "Failed to encode input."
+                };
+            } else {
+                const result = decodeBase64(input);
+                return {
+                    output: result || "",
+                    error: result ? null : "Invalid Base64 string. Check your input."
+                };
+            }
+        } catch (e) {
+            return { output: "", error: "An unexpected error occurred." };
+        }
+    }, [input, mode]);
+
+    const { output, error } = results;
 
     const handleSwap = () => {
         if (!output) return;

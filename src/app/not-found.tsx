@@ -4,12 +4,11 @@ export default function NotFound() {
     return (
         <div
             style={{
-                minHeight: "100vh",
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
                 justifyContent: "center",
-                padding: "2rem",
+                padding: "6rem 2rem",
                 textAlign: "center",
                 background: "var(--bg-primary)",
             }}

@@ -36,8 +36,8 @@ export default function StatsPage() {
     const totalViews = stats.reduce((acc, curr) => acc + (curr.viewCount || 0), 0);
 
     return (
-        <main className="container section-padding" style={{ minHeight: "80vh" }}>
-            <div style={{ marginBottom: "3rem", textAlign: "center" }}>
+        <main className="container section-padding">
+            <div style={{ marginBottom: "3rem", textAlign: "center", paddingTop: "2rem" }}>
                 <h1 className="gradient-text" style={{ fontSize: "2.5rem", marginBottom: "1rem" }}>
                     Tool Usage Analytics
                 </h1>
