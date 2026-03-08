@@ -13,9 +13,86 @@ This document is a comprehensive guide for testing every feature of the DevTools
     *   **Auto-Format on Paste**: Copy minified JSON and paste it into the input area. It should format instantly.
     *   **Validation**: Paste invalid JSON (e.g., `{name: 'John'}`) and verify the detailed error message appears in the output card.
 
+### 10. Code Formatter
+**Objective:** Clean up minified JavaScript.
+- **Input:** `function test(){console.log("hello");}`
+- **Output:**
+  ```javascript
+  function test() {
+      console.log("hello");
+  }
+  ```
+
+---
+
+## Part 3: New Utility Expansion (10 New Tools)
+
+### 11. Number Base Converter
+**Objective:** Convert a decimal number to multiple bases.
+- **Input (Decimal):** `255`
+- **Output:** 
+  - Hex: `FF`
+  - Binary: `11111111`
+  - Octal: `377`
+
+### 12. Aspect Ratio Calculator
+**Objective:** Calculate dimensions for a 16:9 ratio.
+- **Width:** `1920`
+- **Ratio:** `16:9`
+- **Resulting Height:** `1080`
+
+### 13. CSS Unit Converter
+**Objective:** Convert 24px to REM (base 16px).
+- **Base Size:** `16px`
+- **Input:** `24px`
+- **Output:** `1.5rem`
+
+### 14. JWT Decoder
+**Objective:** Inspect a JSON Web Token payload securely.
+- **Input:** `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...`
+- **Output:** Decoded JSON Payload (e.g., `{"sub": "12345", "name": "John Doe"}`)
+
+### 15. Hashing Tool
+**Objective:** Generate a SHA-256 hash for a string.
+- **Input:** `hello world`
+- **Algorithm:** `SHA-256`
+- **Output:** `b94d27b9934d3e08...`
+
+### 16. YAML ↔ JSON Converter
+**Objective:** Convert YAML configuration to JSON.
+- **Input (YAML):**
+  ```yaml
+  database:
+    host: localhost
+  ```
+- **Output (JSON):** `{"database": {"host": "localhost"}}`
+
+### 17. Image ↔ Base64 Converter
+**Objective:** Convert a PNG to a Data URI.
+- **Input:** `image.png` (Upload)
+- **Output:** `data:image/png;base64,iVBORw...`
+
+### 18. HTTP Header Parser
+**Objective:** Analyze raw HTTP headers.
+- **Input:** `Content-Type: application/json`
+- **Output:** Structured table with "Indicates the media type of the resource" description.
+
+### 19. Cron Expression Generator
+**Objective:** Translate cron syntax to English.
+- **Input:** `0 0 * * 1`
+- **Output:** "At 00:00 AM, only on Monday"
+
+### 20. SVG Optimizer / Compressor
+**Objective:** Reduce SVG file size by removing metadata.
+- **Input:** SVG from Sketch/Figma.
+- **Output:** Minified SVG (often 40%+ smaller).
+
+---
+
+## Part 4: Feature Verification Guide
 ### 2. Code Formatter
 *   **Input (JS):** `function add(a,b){return a+b;}`
-*   **Input (CSS):** `card{padding:10px;margin-bottom:20px;}`
+*   **Input (CSS):s** `card{padding:10px;margin-bottom:20px;}`
 *   **Options to Test:**
     *   **Language Selection**: Toggle between JavaScript, CSS, and HTML.
     *   **Indentation Size**: Toggle between **2 spaces** and **4 spaces**.

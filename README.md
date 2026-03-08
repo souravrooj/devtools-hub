@@ -62,12 +62,14 @@ The platform is:
 
 ## 🛠️ Tools Included
 
-### 🚀 All Tools (v1.0 & v2.0)
+### Available Tools (23)
 
-- 🧱 **JSON Formatter**: Instantly beautify or minify JSON with auto-formatting.
-- 🔗 **Base64 Tool**: Securely encode and decode strings with a single click.
-- 🎨 **Color Palette**: Generate harmonious palettes with contrast accessibility checks.
-- 🔒 **Password Generator**: Create crypto-secure passwords with custom complexity.
+- **⚖️ Formatting**: JSON Formatter, Code Formatter (JS/CSS/HTML), SQL Formatter (Planned), YAML ↔ JSON
+- **🔄 Encoding**: Base64 Encoder/Decoder, URL Encoder/Decoder, Image ↔ Base64
+- **🔐 Security**: Password Generator, JWT Decoder, Hashing Tool (SHA-256, SHA-512)
+- **💻 Developer**: Regex Tester, UUID Generator, Timestamp Converter, HTML Preview, Cron Generator, HTTP Header Parser
+- **🎨 Design**: Color Palette Generator, Aspect Ratio Calculator, CSS Unit Converter, SVG Optimizer
+- **📄 Text**: Text Diff Checker, Lorem Ipsum Generator
 - 📝 **Markdown Preview**: Live side-by-side rendering for formatted content.
 - ⚡ **Regex Tester**: Real-time expression testing with group capture highlighting.
 - 🛡️ **UUID Generator**: Bulk unique ID generation (v4) with multiple formats.

@@ -208,9 +208,25 @@ Phase 7 — Polish         █████████████████�
  **Total: 100% of Primary Roadmap Complete!**
 *(The remaining 5% of the total vision is OAuth & Cloud Sync, which are designated for v3.0)*
 
+### Phase 8: Global Layout & Production Stabilization ✅
+- [x] Unified Header/Footer across all routes
+- [x] SSR-safe utility functions (Node.js Buffer fallbacks)
+- [x] Resolved production build serialization errors
+
+### Phase 9: 10-Tool Mega Expansion ✅
+- [x] **JWT Decoder**: Inspect tokens locally
+- [x] **Cron Generator**: Human-readable schedules
+- [x] **YAML ↔ JSON**: Bidirectional config converter
+- [x] **CSS Unit Converter**: Responsive design calculator
+- [x] **Aspect Ratio Tool**: Scaling dimensions preview
+- [x] **HTTP Header Parser**: Protocol debugging
+- [x] **SVG Optimizer**: Reducing asset size
+- [x] **Image ↔ Base64**: No-upload conversion
+- [x] **Number Base Converter**: Hex/Binary/Octal
+- [x] **Hashing Tool**: Secure SHA local hashing
+
 ### 🔍 What's Left for v3.0?
 - [ ] **NextAuth Integration**: GitHub & Google login for cross-device sync.
 - [ ] **Cloud Databases**: Move favorites/history from `localStorage` to MongoDB.
 - [ ] **User Dashboards**: Personal profiles with tool usage heatmaps.
 - [ ] **Admin Panel**: To moderate tool suggestions and view global analytics.
-
