@@ -118,6 +118,9 @@ The project uses **Next.js App Router** (`src/app/`).
 | `/tools/base64` | `src/app/(tools)/tools/base64/page.tsx` | Base64 Encoder/Decoder |
 | `/tools/color-palette` | `src/app/(tools)/tools/color-palette/page.tsx` | Color Palette Generator |
 | `/api/tools` | `src/app/api/tools/route.ts` | Returns tool registry as JSON |
+| `/api/suggestions` | `src/app/api/suggestions/route.ts` | POST: Save tool ideas & trigger email |
+| `/api/contact` | `src/app/api/contact/route.ts` | POST: Save messages & trigger email |
+| `/api/analytics/search`| `src/app/api/analytics/search/route.ts`| POST: Log user search queries |
 
 ### Why a Route Group `(tools)`?
 The `(tools)` folder is a **Next.js route group**. The parentheses mean the folder name is NOT included in the URL — it's purely for organizing files. This allows tools to share a layout without affecting the URL structure.
@@ -135,13 +138,14 @@ The `(tools)` folder is a **Next.js route group**. The parentheses mean the fold
 
 | Component | Type | Responsibility |
 |-----------|------|---------------|
-| `Header.tsx` | Client | Nav links, theme toggle button |
-| `Footer.tsx` | Server | Static links, copyright |
-| `ToolCard.tsx` | Server | Renders a single tool in the grid |
-| `SearchBar.tsx` | Client | Controlled input, filters tool list |
-| `CopyButton.tsx` | Client | Clipboard copy + "Copied!" feedback |
-| `Button.tsx` | Server | Styled button with size/variant props |
-| `ToolPageLayout.tsx` | Server | Consistent tool page shell (title, back btn) |
+| Header.tsx | Client | Nav links, theme toggle, glassmorphism |
+| Footer.tsx | Server | Static links, copyright, API docs link |
+| ToolCard.tsx | Server | Grid item with glass-sm, favorite heart, and lift animation |
+| SearchBar.tsx | Client | Controlled input with debounced analytics |
+| Toast.tsx | Client | Global context-based notification system |
+| ErrorBoundary.tsx | Client | Sophisticated visual fallback for failed tool renders |
+| CopyButton.tsx | Client | Clipboard copy + "Copied!" feedback |
+| ToolPageLayout.tsx | Server | Consistent tool page shell (title, back btn, analytics) |
 
 ---
 
@@ -161,6 +165,9 @@ MongoDB is only used for **optional features** — the app works fully without i
 | Model | Collection | Purpose |
 |-------|-----------|---------|
 | `Tool` | `tools` | Tracks page view counts per tool |
+| `Suggestion` | `suggestions` | Stores user tool ideas |
+| `Contact` | `contacts` | Stores user contact messages |
+| `SearchAnalytics` | `searchanalytics`| Records user search queries |
 
 The connection is managed in `src/lib/mongodb.ts` using a module-level cache to prevent connection pool exhaustion during Next.js hot-reload in development.
 
@@ -259,8 +266,8 @@ Defined in `src/app/globals.css` as CSS variables, switched by the `.dark` class
 
 | Variable | Used In | Required | Notes |
 |----------|---------|----------|-------|
-| `MONGODB_URI` | `src/lib/mongodb.ts` | No (v1) | MongoDB Atlas connection string |
-| `MONGODB_DB_NAME` | `src/lib/mongodb.ts` | No (v1) | Defaults to `devtools_hub` |
+| `MONGODB_URI` | `src/lib/mongodb.ts` | Yes | MongoDB Atlas connection string |
+| `RESEND_API_KEY` | API routes | Yes | Resend API key for email alerts |
 | `NEXT_PUBLIC_APP_URL` | SEO meta tags | Yes | Base URL of the app |
 | `NEXT_PUBLIC_APP_NAME` | Layout, metadata | Yes | Display name |
 | `NEXT_PUBLIC_APP_DESCRIPTION` | SEO meta tags | Yes | Meta description |

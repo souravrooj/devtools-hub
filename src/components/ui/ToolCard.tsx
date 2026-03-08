@@ -19,7 +19,7 @@ export default function ToolCard({ tool }: { tool: Tool }) {
         <Link
             href={tool.available ? tool.href : "#"}
             id={`tool-card-${tool.id}`}
-            className={`card tool-card animate-fade-in ${!tool.available ? "opacity-50 pointer-events-none" : ""}`}
+            className={`card tool-card animate-fade-in glass-sm ${!tool.available ? "opacity-50 pointer-events-none" : ""}`}
             style={{
                 display: "flex",
                 flexDirection: "column",
@@ -28,13 +28,13 @@ export default function ToolCard({ tool }: { tool: Tool }) {
                 cursor: tool.available ? "pointer" : "default",
                 position: "relative",
                 overflow: "hidden",
-                transition: "box-shadow 200ms ease, border-color 200ms ease, transform 200ms ease",
+                transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
             }}
             onMouseEnter={(e) => {
                 if (tool.available) {
                     (e.currentTarget as HTMLElement).style.borderColor = "var(--accent)";
-                    (e.currentTarget as HTMLElement).style.transform = "translateY(-3px)";
-                    (e.currentTarget as HTMLElement).style.boxShadow = "var(--shadow-lg)";
+                    (e.currentTarget as HTMLElement).style.transform = "translateY(-6px)";
+                    (e.currentTarget as HTMLElement).style.boxShadow = "var(--shadow-lg), 0 10px 20px -5px rgb(99 102 241 / 0.15)";
                 }
             }}
             onMouseLeave={(e) => {

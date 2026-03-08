@@ -454,29 +454,123 @@ textarea.input {
   border-radius: var(--radius-sm);
 }
 
-/* Staggered card animations */
+/* Glassmorphism Variants */
+.glass-sm {
+  background: color-mix(in srgb, var(--bg-card) 60%, transparent);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid color-mix(in srgb, var(--border) 30%, transparent);
+}
+
+.glass-md {
+  background: color-mix(in srgb, var(--bg-card) 75%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid color-mix(in srgb, var(--border) 40%, transparent);
+}
+
+.glass-lg {
+  background: color-mix(in srgb, var(--bg-card) 85%, transparent);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid color-mix(in srgb, var(--border) 50%, transparent);
+}
+
+/* Staggered card animations (Extended to 24) */
 .tool-card:nth-child(1) {
-  animation-delay: 0.04s;
+  animation-delay: 0.02s;
 }
 
 .tool-card:nth-child(2) {
-  animation-delay: 0.08s;
+  animation-delay: 0.04s;
 }
 
 .tool-card:nth-child(3) {
-  animation-delay: 0.12s;
+  animation-delay: 0.06s;
 }
 
 .tool-card:nth-child(4) {
-  animation-delay: 0.16s;
+  animation-delay: 0.08s;
 }
 
 .tool-card:nth-child(5) {
-  animation-delay: 0.20s;
+  animation-delay: 0.10s;
 }
 
 .tool-card:nth-child(6) {
+  animation-delay: 0.12s;
+}
+
+.tool-card:nth-child(7) {
+  animation-delay: 0.14s;
+}
+
+.tool-card:nth-child(8) {
+  animation-delay: 0.16s;
+}
+
+.tool-card:nth-child(9) {
+  animation-delay: 0.18s;
+}
+
+.tool-card:nth-child(10) {
+  animation-delay: 0.20s;
+}
+
+.tool-card:nth-child(11) {
+  animation-delay: 0.22s;
+}
+
+.tool-card:nth-child(12) {
   animation-delay: 0.24s;
+}
+
+.tool-card:nth-child(13) {
+  animation-delay: 0.26s;
+}
+
+.tool-card:nth-child(14) {
+  animation-delay: 0.28s;
+}
+
+.tool-card:nth-child(15) {
+  animation-delay: 0.30s;
+}
+
+.tool-card:nth-child(16) {
+  animation-delay: 0.32s;
+}
+
+.tool-card:nth-child(17) {
+  animation-delay: 0.34s;
+}
+
+.tool-card:nth-child(18) {
+  animation-delay: 0.36s;
+}
+
+.tool-card:nth-child(19) {
+  animation-delay: 0.38s;
+}
+
+.tool-card:nth-child(20) {
+  animation-delay: 0.40s;
+}
+
+.tool-card:nth-child(21) {
+  animation-delay: 0.42s;
+}
+
+.tool-card:nth-child(22) {
+  animation-delay: 0.44s;
+}
+
+.tool-card:nth-child(23) {
+  animation-delay: 0.46s;
+}
+
+.tool-card:nth-child(24) {
+  animation-delay: 0.48s;
 }
 
 /* ============================================================

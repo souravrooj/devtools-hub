@@ -2,17 +2,37 @@
 
 import { useState } from "react";
 import ToolPageLayout from "@/components/layout/ToolPageLayout";
+import { useToast } from "@/components/ui/Toast";
 
 export default function SuggestToolPage() {
     const [status, setStatus] = useState<"idle" | "submitting" | "success">("idle");
+    const [formData, setFormData] = useState({ name: "", description: "", email: "" });
+    const { showToast } = useToast();
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setStatus("submitting");
-        // Simulate API call
-        setTimeout(() => {
-            setStatus("success");
-        }, 1500);
+
+        try {
+            const res = await fetch("/api/suggestions", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(formData),
+            });
+
+            const json = await res.json();
+
+            if (json.success) {
+                setStatus("success");
+                showToast("Suggestion sent successfully!");
+            } else {
+                throw new Error(json.error || "Failed to send suggestion");
+            }
+        } catch (err: any) {
+            console.error("Suggestion error:", err);
+            showToast(err.message || "Failed to send suggestion", "error");
+            setStatus("idle");
+        }
     };
 
     if (status === "success") {
@@ -48,6 +68,8 @@ export default function SuggestToolPage() {
                         <input
                             type="text"
                             className="input"
+                            value={formData.name}
+                            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                             placeholder="e.g., JWT Debugger"
                             required
                             style={{ width: "100%" }}
@@ -60,6 +82,8 @@ export default function SuggestToolPage() {
                         </label>
                         <textarea
                             className="input"
+                            value={formData.description}
+                            onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                             placeholder="What should this tool do?"
                             rows={4}
                             required
@@ -69,12 +93,15 @@ export default function SuggestToolPage() {
 
                     <div style={{ marginBottom: "2rem" }}>
                         <label style={{ display: "block", fontSize: "0.875rem", fontWeight: 600, marginBottom: "0.5rem" }}>
-                            Your Email (Optional)
+                            Your Email
                         </label>
                         <input
                             type="email"
                             className="input"
+                            value={formData.email}
+                            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                             placeholder="To notify you when it's live"
+                            required
                             style={{ width: "100%" }}
                         />
                     </div>

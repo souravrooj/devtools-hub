@@ -12,14 +12,12 @@ export default function Header() {
 
     return (
         <header
+            className="glass-md"
             style={{
-                background: "color-mix(in srgb, var(--bg-primary) 85%, transparent)",
-                backdropFilter: "blur(16px)",
-                WebkitBackdropFilter: "blur(16px)",
-                borderBottom: "1px solid var(--border)",
                 position: "sticky",
                 top: 0,
                 zIndex: 50,
+                borderBottom: "1px solid var(--border)",
             }}
         >
             <div className="container" style={{ padding: "0 1.5rem" }}>

@@ -1,14 +1,49 @@
 "use client";
 
+import { useState } from "react";
 import ToolPageLayout from "@/components/layout/ToolPageLayout";
+import { useToast } from "@/components/ui/Toast";
 
 export default function ContactPage() {
+    const [status, setStatus] = useState<"idle" | "submitting" | "success">("idle");
+    const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+    const { showToast } = useToast();
+
     const owner = {
         name: "Sourav Rooj",
         email: "souravrooj64@gmail.com",
         phone: "+91 7001014799",
         github: "https://github.com/souravrooj",
         location: "India"
+    };
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setStatus("submitting");
+
+        try {
+            const res = await fetch("/api/contact", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(formData),
+            });
+
+            const json = await res.json();
+
+            if (json.success) {
+                setStatus("success");
+                showToast("Message sent successfully!");
+                setFormData({ name: "", email: "", message: "" });
+                // Reset success status after a while to allow new messages
+                setTimeout(() => setStatus("idle"), 5000);
+            } else {
+                throw new Error(json.error || "Failed to send message");
+            }
+        } catch (err: any) {
+            console.error("Contact error:", err);
+            showToast(err.message || "Failed to send message", "error");
+            setStatus("idle");
+        }
     };
 
     return (
@@ -70,20 +105,56 @@ export default function ContactPage() {
                     {/* Quick Message Form */}
                     <div className="card" style={{ padding: "2.5rem" }}>
                         <h3 style={{ fontSize: "1.25rem", fontWeight: 800, marginBottom: "1.5rem" }}>Send a Quick Message</h3>
-                        <form onSubmit={(e) => { e.preventDefault(); alert('Message sent to Sourav!'); }}>
+                        <form onSubmit={handleSubmit}>
                             <div style={{ marginBottom: "1.25rem" }}>
                                 <label style={{ display: "block", fontSize: "0.875rem", fontWeight: 600, marginBottom: "0.5rem" }}>Your Name</label>
-                                <input type="text" className="input" placeholder="John Doe" required style={{ width: "100%" }} />
+                                <input
+                                    type="text"
+                                    className="input"
+                                    value={formData.name}
+                                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                                    placeholder="John Doe"
+                                    required
+                                    style={{ width: "100%" }}
+                                />
                             </div>
                             <div style={{ marginBottom: "1.25rem" }}>
                                 <label style={{ display: "block", fontSize: "0.875rem", fontWeight: 600, marginBottom: "0.5rem" }}>Your Email</label>
-                                <input type="email" className="input" placeholder="john@example.com" required style={{ width: "100%" }} />
+                                <input
+                                    type="email"
+                                    className="input"
+                                    value={formData.email}
+                                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                                    placeholder="john@example.com"
+                                    required
+                                    style={{ width: "100%" }}
+                                />
                             </div>
                             <div style={{ marginBottom: "1.5rem" }}>
                                 <label style={{ display: "block", fontSize: "0.875rem", fontWeight: 600, marginBottom: "0.5rem" }}>Message</label>
-                                <textarea className="input" placeholder="How can we help you?" rows={5} required style={{ width: "100%", resize: "none" }} />
+                                <textarea
+                                    className="input"
+                                    value={formData.message}
+                                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                                    placeholder="How can we help you?"
+                                    rows={5}
+                                    required
+                                    style={{ width: "100%", resize: "none" }}
+                                />
                             </div>
-                            <button type="submit" className="btn btn-primary" style={{ width: "100%", height: "48px" }}>🚀 Send Message</button>
+                            <button
+                                type="submit"
+                                disabled={status === "submitting"}
+                                className="btn btn-primary"
+                                style={{ width: "100%", height: "48px" }}
+                            >
+                                {status === "submitting" ? "📡 Sending..." : "🚀 Send Message"}
+                            </button>
+                            {status === "success" && (
+                                <p style={{ color: "var(--success)", fontSize: "0.875rem", marginTop: "1rem", textAlign: "center", fontWeight: 600 }}>
+                                    Message sent! I'll get back to you soon.
+                                </p>
+                            )}
                         </form>
                     </div>
                 </div>

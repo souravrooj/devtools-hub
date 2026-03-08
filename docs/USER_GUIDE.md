@@ -219,8 +219,23 @@ Picking good colors for a project is hard. This tool generates ready-to-use colo
 - ✅ Instant regeneration
 
 ---
-
-## 🔍 Search Feature
+ 
+ ## 💡 Feature Pages
+ 
+ ### `/suggest` — Suggest a Tool
+ **What it is:** A portal for the community to request new features or utilities.
+ **How it works:** Fill in the tool name and description. Your idea is saved to our database and our team is notified instantly via email.
+ 
+ ### `/contact` — Contact Us
+ **What it is:** A direct line to the project lead, Sourav Rooj.
+ **How it works:** Use the form for business inquiries, bugs, or just to say hi. Messages are persisted and forwarded to the developer's inbox.
+ 
+ ### `/stats` — Usage Analytics
+ **What it is:** A public dashboard showing which tools are the most popular based on real-time usage data.
+ 
+ ---
+ 
+ ## 🔍 Search Feature
 
 The search bar on the home page filters tools in real time.
 
@@ -282,7 +297,7 @@ DevTools Hub is fully responsive:
 A: No. All tools work without any signup or login.
 
 **Q: Is my data stored anywhere?**  
-A: No. All processing happens directly in your browser. Nothing you type is sent to any server or stored in a database.
+ A: For **tools**, no. All processing happens directly in your browser. However, **suggestions** and **contact messages** are securely stored in our MongoDB database so we can respond to them.
 
 **Q: Is this free to use?**  
 A: Yes. Completely free, forever.
@@ -294,7 +309,7 @@ A: You need an internet connection to load the website the first time, but all t
 A: Open an issue on [GitHub](https://github.com/souravrooj/devtools-hub/issues).
 
 **Q: Can I suggest a new tool?**  
-A: Yes! Open a GitHub issue with the label `feature-request`.
+ A: Yes! Use the [Suggest a Tool](/suggest) page directly on the platform.
 
 ---
 

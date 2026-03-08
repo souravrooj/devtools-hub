@@ -35,6 +35,13 @@
 The platform is:
 - **No login required** — just open and use
 - **Instant results** — all tools run in the browser
+### 🛠️ Core Technologies
+- **Framework**: Next.js 16 (App Router)
+- **Styling**: Tailwind CSS 4 + Glassmorphism system
+- **Database**: MongoDB Atlas (Persistence & Analytics)
+- **Email**: Resend API (Notifications)
+- **Typography**: Inter & JetBrains Mono
+- **Deployment**: Vercel
 - **Dark/Light mode** — comfortable at any time of day
 - **Mobile friendly** — works on all screen sizes
 - **Portfolio ready** — clean, professional design
@@ -57,21 +64,18 @@ The platform is:
 
 ### 🚀 All Tools (v1.0 & v2.0)
 
-| Tool | Category | Description | Status |
-|------|----------|-------------|--------|
-| JSON Formatter | Formatting | Format messy JSON with syntax highlighting | ✅ |
-| Code Formatter | Formatting | Beautify JS, CSS, and HTML code | ✅ |
-| Password Generator | Security | Generate strong passwords with custom options | ✅ |
-| Markdown Preview | Developer | Live preview of GitHub-flavored Markdown | ✅ |
-| Base64 Encoder/Decoder | Encoding | Encode or decode text to/from Base64 | ✅ |
-| URL Encoder/Decoder | Encoding | Encode/decode URL safe components | ✅ |
-| Regex Tester | Developer | Test regex with live highlighting | ✅ |
-| UUID Generator | Developer | Generate multiple UUIDs (v1, v4) | ✅ |
-| Timestamp Converter | Developer | Convert Unix timestamps to readable dates | ✅ |
-| Text Diff Checker | Text | High-performance line-by-line comparison | ✅ |
-| Lorem Ipsum Generator | Text | Generate placeholder text with custom counts | ✅ |
-| HTML Preview | Developer | Real-time sandboxed HTML/CSS rendering | ✅ |
-| Color Palette Generator | Design | Generate random accessible color palettes | ✅ |
+- 🧱 **JSON Formatter**: Instantly beautify or minify JSON with auto-formatting.
+- 🔗 **Base64 Tool**: Securely encode and decode strings with a single click.
+- 🎨 **Color Palette**: Generate harmonious palettes with contrast accessibility checks.
+- 🔒 **Password Generator**: Create crypto-secure passwords with custom complexity.
+- 📝 **Markdown Preview**: Live side-by-side rendering for formatted content.
+- ⚡ **Regex Tester**: Real-time expression testing with group capture highlighting.
+- 🛡️ **UUID Generator**: Bulk unique ID generation (v4) with multiple formats.
+- 🕒 **Timestamp Converter**: Seamless switching between Unix and ISO formats.
+- 📄 **Text Diff**: Compare strings line-by-line with visual highlights.
+- 🔍 **Search Analytics**: Debounced tracking of query intent to prioritize new tools.
+- 📩 **Persistent Feedback**: Forms for Suggestions & Contact saved directly to MongoDB.
+- 🚀 **Real-time Notifications**: Immediate alerts via **Resend API** for all user inputs.
 
 ---
 
@@ -85,6 +89,7 @@ The platform is:
 | PWA | [next-pwa](https://github.com/ducanh2912/next-pwa) | Offline support (Manifest & Icons) |
 | Database | [MongoDB Atlas](https://www.mongodb.com/atlas) | Cloud document database |
 | ORM | [Mongoose](https://mongoosejs.com/) | MongoDB schema modeling |
+| Email | [Resend](https://resend.com/) | Transactional email notifications |
 | Deployment | [Vercel](https://vercel.com/) | Hosting & CI/CD |
 
 ---
@@ -191,14 +196,11 @@ All environment variables are documented in [`.env.example`](.env.example).
 
 > ⚠️ **Never commit `.env` to Git.** It is already listed in `.gitignore`.
 
-| Variable | Required | Description |
-|----------|----------|-------------|
-| `MONGODB_URI` | Optional (v1) | MongoDB Atlas connection string |
-| `MONGODB_DB_NAME` | Optional (v1) | MongoDB database name |
-| `NEXTAUTH_SECRET` | Future | Secret for NextAuth session encryption |
-| `NEXTAUTH_URL` | Future | Canonical URL of your app |
-| `NEXT_PUBLIC_APP_URL` | Yes | Public base URL of the app |
-| `NEXT_PUBLIC_APP_NAME` | Yes | Display name of the app |
+| Variable | Purpose | Required |
+|----------|---------|----------|
+| `MONGODB_URI` | Database connection for persistence | Yes |
+| `RESEND_API_KEY` | Email notification service | Yes |
+| `NEXT_PUBLIC_APP_URL` | Canonical URL for SEO/Sitemap | Yes |
 
 ---
 

@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect } from "react";
+
 interface SearchBarProps {
     value: string;
     onChange: (value: string) => void;
@@ -11,6 +13,20 @@ export default function SearchBar({
     onChange,
     placeholder = "Search tools... (e.g. json, password, color)",
 }: SearchBarProps) {
+    // Analytics tracking
+    useEffect(() => {
+        if (!value || value.length < 3) return;
+
+        const timer = setTimeout(() => {
+            fetch("/api/analytics/search", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ query: value }),
+            }).catch(e => console.error("Analytics error:", e));
+        }, 1000); // 1s debounce
+
+        return () => clearTimeout(timer);
+    }, [value]);
     return (
         <div style={{ position: "relative", maxWidth: "560px", width: "100%" }}>
             {/* Search icon */}
