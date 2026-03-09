@@ -144,6 +144,11 @@ export default function ToolCard({ tool }: { tool: Tool }) {
                 <span className={`badge ${categoryColors[tool.category] ?? "badge-muted"}`}>
                     {tool.category}
                 </span>
+                {tool.viewCount !== undefined && tool.viewCount > 10 && (
+                    <span className="badge badge-accent" style={{ fontSize: "0.65rem", opacity: 0.8, display: "flex", alignItems: "center", gap: "2px" }}>
+                        🔥 {tool.viewCount.toLocaleString()} uses
+                    </span>
+                )}
             </div>
 
             {/* Description */}

@@ -15,7 +15,14 @@ import mongoose, { Schema, Document, Model } from "mongoose";
 
 export interface IToolDocument extends Document {
     toolId: string;        // References Tool.id from data/tools.ts
+    name: string;
+    description: string;
+    category: string;
+    icon: string;
+    available: boolean;
+    keywords: string[];
     viewCount: number;     // How many times this tool was accessed
+    favoritesCount: number; // Global favorite count
     createdAt: Date;
     updatedAt: Date;
 }
@@ -33,7 +40,18 @@ const ToolSchema = new Schema<IToolDocument>(
             trim: true,
             lowercase: true,
         },
+        name: { type: String, required: true },
+        description: { type: String, required: true },
+        category: { type: String, required: true },
+        icon: { type: String, required: true },
+        available: { type: Boolean, default: true },
+        keywords: { type: [String], default: [] },
         viewCount: {
+            type: Number,
+            default: 0,
+            min: 0,
+        },
+        favoritesCount: {
             type: Number,
             default: 0,
             min: 0,
@@ -50,6 +68,7 @@ const ToolSchema = new Schema<IToolDocument>(
 
 ToolSchema.index({ toolId: 1 });
 ToolSchema.index({ viewCount: -1 });
+ToolSchema.index({ category: 1 });
 
 // ---------------------------------------------------------------------------
 // Model Export (singleton-safe for Next.js hot-reload in development)

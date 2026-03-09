@@ -35,6 +35,10 @@ export interface Tool {
     available: boolean;
     /** Optional array of search keywords to help users find the tool */
     keywords?: string[];
+    /** Number of times the tool has been viewed/used (from API) */
+    viewCount?: number;
+    /** Number of times the tool has been favorited (from API) */
+    favoritesCount?: number;
 }
 
 // ---------------------------------------------------------------------------

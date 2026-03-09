@@ -1,13 +1,13 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
 import ToolCard from "@/components/ui/ToolCard";
 import SearchBar from "@/components/ui/SearchBar";
 import { TOOLS, CATEGORIES } from "@/data/tools";
 import { useFavorites } from "@/hooks/useFavorites";
 import { useRecentlyUsed } from "@/hooks/useRecentlyUsed";
-import type { ToolCategory } from "@/types";
+import type { ToolCategory, Tool } from "@/types";
 
 export default function HomePage() {
   const [search, setSearch] = useState("");
@@ -16,15 +16,32 @@ export default function HomePage() {
   );
   const { favorites } = useFavorites();
   const { recents } = useRecentlyUsed();
+  const [tools, setTools] = useState<Tool[]>(TOOLS);
+
+  // Fetch enhanced tools with stats
+  useEffect(() => {
+    const fetchTools = async () => {
+      try {
+        const res = await fetch("/api/tools");
+        const json = await res.json();
+        if (json.success && json.data.tools) {
+          setTools(json.data.tools);
+        }
+      } catch (err) {
+        console.error("Failed to fetch tools stats:", err);
+      }
+    };
+    fetchTools();
+  }, []);
 
   const recentTools = useMemo(() => {
     return recents
-      .map(id => TOOLS.find(t => t.id === id))
+      .map(id => tools.find(t => t.id === id))
       .filter((t): t is typeof TOOLS[0] => !!t);
-  }, [recents]);
+  }, [recents, tools]);
 
   const filtered = useMemo(() => {
-    let results = TOOLS;
+    let results = tools;
 
     // Favorites filter
     if (activeCategory === "favorites") {
@@ -51,7 +68,7 @@ export default function HomePage() {
     }
 
     return results;
-  }, [search, activeCategory, favorites]);
+  }, [search, activeCategory, favorites, tools]);
 
   const available = filtered.filter((t) => t.available);
   const comingSoon = filtered.filter((t) => !t.available);
