@@ -4,6 +4,7 @@ import { useState, useMemo } from "react";
 import ToolPageLayout from "@/components/layout/ToolPageLayout";
 import yaml from "js-yaml";
 import CopyButton from "@/components/ui/CopyButton";
+import ResizableLayout from "@/components/ui/ResizableLayout";
 
 export default function YAMLtoJSON() {
     const [input, setInput] = useState("");
@@ -44,6 +45,62 @@ export default function YAMLtoJSON() {
         letterSpacing: "0.05em",
     };
 
+    const leftPanel = (
+        <div className="card" style={{ padding: "1.5rem", height: "100%", display: "flex", flexDirection: "column" }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "0.5rem" }}>
+                <label style={labelStyle}>{mode === "yaml-to-json" ? "YAML Input" : "JSON Input"}</label>
+                <button onClick={() => setInput("")} className="btn btn-ghost btn-sm" style={{ padding: "2px 8px" }}>Clear</button>
+            </div>
+            <textarea
+                className="input"
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                placeholder={mode === "yaml-to-json" ? "Paste YAML here..." : "Paste JSON here..."}
+                style={{ flex: 1, fontFamily: "var(--font-mono)", fontSize: "0.875rem", resize: "none", minHeight: "400px" }}
+            />
+        </div>
+    );
+
+    const rightPanel = (
+        <div className="card" style={{ padding: "1.5rem", height: "100%", display: "flex", flexDirection: "column" }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "0.5rem" }}>
+                <label style={labelStyle}>{mode === "yaml-to-json" ? "JSON Output" : "YAML Output"}</label>
+                {result.output && <CopyButton text={result.output} size="sm" variant="ghost" />}
+            </div>
+
+            {result.error ? (
+                <div
+                    style={{
+                        padding: "1rem",
+                        color: "#ef4444",
+                        background: "rgba(239, 68, 68, 0.05)",
+                        borderRadius: "var(--radius-md)",
+                        border: "1px solid rgba(239, 68, 68, 0.2)",
+                        fontFamily: "var(--font-mono)",
+                        fontSize: "0.8125rem",
+                        flex: 1,
+                        whiteSpace: "pre-wrap"
+                    }}
+                >
+                    ❌ {result.error}
+                </div>
+            ) : (
+                <pre
+                    className="code-block"
+                    style={{
+                        flex: 1,
+                        overflowY: "auto",
+                        margin: 0,
+                        fontSize: "0.8125rem",
+                        minHeight: "400px"
+                    }}
+                >
+                    {result.output || "Result will appear here..."}
+                </pre>
+            )}
+        </div>
+    );
+
     return (
         <ToolPageLayout
             id="yaml-to-json"
@@ -51,7 +108,7 @@ export default function YAMLtoJSON() {
             description="Convert between YAML and JSON formats instantly. Perfect for configuration files and API data."
             icon="📄"
         >
-            <div className="card" style={{ padding: "2rem", maxWidth: "1000px", margin: "0 auto" }}>
+            <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
                 {/* Mode Selector */}
                 <div
                     style={{
@@ -98,62 +155,7 @@ export default function YAMLtoJSON() {
                     </button>
                 </div>
 
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "2rem" }}>
-                    {/* Input */}
-                    <div>
-                        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "0.5rem" }}>
-                            <label style={labelStyle}>{mode === "yaml-to-json" ? "YAML Input" : "JSON Input"}</label>
-                            <button onClick={() => setInput("")} className="btn btn-ghost btn-sm" style={{ padding: "2px 8px" }}>Clear</button>
-                        </div>
-                        <textarea
-                            className="input"
-                            value={input}
-                            onChange={(e) => setInput(e.target.value)}
-                            placeholder={mode === "yaml-to-json" ? "Paste YAML here..." : "Paste JSON here..."}
-                            rows={15}
-                            style={{ fontFamily: "var(--font-mono)", fontSize: "0.875rem", resize: "vertical" }}
-                        />
-                    </div>
-
-                    {/* Output */}
-                    <div>
-                        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "0.5rem" }}>
-                            <label style={labelStyle}>{mode === "yaml-to-json" ? "JSON Output" : "YAML Output"}</label>
-                            {result.output && <CopyButton text={result.output} size="sm" variant="ghost" />}
-                        </div>
-
-                        {result.error ? (
-                            <div
-                                style={{
-                                    padding: "1rem",
-                                    color: "#ef4444",
-                                    background: "rgba(239, 68, 68, 0.05)",
-                                    borderRadius: "var(--radius-md)",
-                                    border: "1px solid rgba(239, 68, 68, 0.2)",
-                                    fontFamily: "var(--font-mono)",
-                                    fontSize: "0.8125rem",
-                                    minHeight: "348px",
-                                    whiteSpace: "pre-wrap"
-                                }}
-                            >
-                                ❌ {result.error}
-                            </div>
-                        ) : (
-                            <pre
-                                className="code-block"
-                                style={{
-                                    minHeight: "348px",
-                                    maxHeight: "500px",
-                                    overflowY: "auto",
-                                    margin: 0,
-                                    fontSize: "0.8125rem"
-                                }}
-                            >
-                                {result.output || "Result will appear here..."}
-                            </pre>
-                        )}
-                    </div>
-                </div>
+                <ResizableLayout left={leftPanel} right={rightPanel} />
             </div>
         </ToolPageLayout>
     );

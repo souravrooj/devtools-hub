@@ -4,6 +4,7 @@ import { useState } from "react";
 import { marked } from "marked";
 import ToolPageLayout from "@/components/layout/ToolPageLayout";
 import CopyButton from "@/components/ui/CopyButton";
+import ResizableLayout from "@/components/ui/ResizableLayout";
 
 const DEFAULT_MARKDOWN = `# Hello Markdown! 👋
 
@@ -49,6 +50,106 @@ export default function MarkdownPreviewPage() {
         }
     })();
 
+    const leftPanel = (
+        <div
+            className="card"
+            style={{
+                display: "flex",
+                flexDirection: "column",
+                padding: "1.25rem",
+                height: "100%",
+            }}
+        >
+            <div
+                style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    marginBottom: "0.75rem",
+                }}
+            >
+                <span
+                    style={{
+                        fontSize: "0.8125rem",
+                        fontWeight: 600,
+                        color: "var(--text-secondary)",
+                        textTransform: "uppercase",
+                        letterSpacing: "0.05em",
+                    }}
+                >
+                    Markdown
+                </span>
+                <div style={{ display: "flex", gap: "0.5rem" }}>
+                    <CopyButton text={input} label="Copy MD" size="sm" />
+                    <button
+                        onClick={() => setInput("")}
+                        className="btn btn-ghost btn-sm"
+                    >
+                        Clear
+                    </button>
+                </div>
+            </div>
+            <textarea
+                id="markdown-input"
+                className="input"
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                placeholder="Type your Markdown here..."
+                style={{
+                    flex: 1,
+                    fontFamily: "var(--font-mono)",
+                    fontSize: "0.875rem",
+                    resize: "none",
+                    minHeight: "440px",
+                    lineHeight: 1.7,
+                }}
+            />
+        </div>
+    );
+
+    const rightPanel = (
+        <div
+            className="card"
+            style={{
+                display: "flex",
+                flexDirection: "column",
+                padding: "1.25rem",
+                height: "100%",
+            }}
+        >
+            <div
+                style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    marginBottom: "0.75rem",
+                }}
+            >
+                <span
+                    style={{
+                        fontSize: "0.8125rem",
+                        fontWeight: 600,
+                        color: "var(--text-secondary)",
+                        textTransform: "uppercase",
+                        letterSpacing: "0.05em",
+                    }}
+                >
+                    Preview
+                </span>
+            </div>
+            <div
+                className="markdown-body"
+                style={{
+                    flex: 1,
+                    overflow: "auto",
+                    padding: "0.5rem",
+                    minHeight: "440px",
+                }}
+                dangerouslySetInnerHTML={{ __html: html }}
+            />
+        </div>
+    );
+
     return (
         <ToolPageLayout
             id="markdown-preview"
@@ -56,119 +157,7 @@ export default function MarkdownPreviewPage() {
             description="Write Markdown and see a live rendered preview alongside your text."
             icon="📝"
         >
-            <div
-                style={{
-                    display: "grid",
-                    gridTemplateColumns: "1fr 1fr",
-                    gap: "1.25rem",
-                    minHeight: "520px",
-                }}
-                className="tool-grid"
-            >
-                {/* Editor */}
-                <div
-                    className="card"
-                    style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        padding: "1.25rem",
-                    }}
-                >
-                    <div
-                        style={{
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "space-between",
-                            marginBottom: "0.75rem",
-                        }}
-                    >
-                        <span
-                            style={{
-                                fontSize: "0.8125rem",
-                                fontWeight: 600,
-                                color: "var(--text-secondary)",
-                                textTransform: "uppercase",
-                                letterSpacing: "0.05em",
-                            }}
-                        >
-                            Markdown
-                        </span>
-                        <div style={{ display: "flex", gap: "0.5rem" }}>
-                            <CopyButton text={input} label="Copy MD" size="sm" />
-                            <button
-                                onClick={() => setInput("")}
-                                className="btn btn-ghost btn-sm"
-                            >
-                                Clear
-                            </button>
-                        </div>
-                    </div>
-                    <textarea
-                        id="markdown-input"
-                        className="input"
-                        value={input}
-                        onChange={(e) => setInput(e.target.value)}
-                        placeholder="Type your Markdown here..."
-                        style={{
-                            flex: 1,
-                            fontFamily: "var(--font-mono)",
-                            fontSize: "0.875rem",
-                            resize: "none",
-                            minHeight: "440px",
-                            lineHeight: 1.7,
-                        }}
-                    />
-                </div>
-
-                {/* Preview */}
-                <div
-                    className="card"
-                    style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        padding: "1.25rem",
-                    }}
-                >
-                    <div
-                        style={{
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "space-between",
-                            marginBottom: "0.75rem",
-                        }}
-                    >
-                        <span
-                            style={{
-                                fontSize: "0.8125rem",
-                                fontWeight: 600,
-                                color: "var(--text-secondary)",
-                                textTransform: "uppercase",
-                                letterSpacing: "0.05em",
-                            }}
-                        >
-                            Preview
-                        </span>
-                    </div>
-                    <div
-                        className="markdown-body"
-                        style={{
-                            flex: 1,
-                            overflow: "auto",
-                            padding: "0.5rem",
-                            minHeight: "440px",
-                        }}
-                        dangerouslySetInnerHTML={{ __html: html }}
-                    />
-                </div>
-            </div>
-
-            <style>{`
-        @media (max-width: 768px) {
-          .tool-grid {
-            grid-template-columns: 1fr !important;
-          }
-        }
-      `}</style>
+            <ResizableLayout left={leftPanel} right={rightPanel} />
         </ToolPageLayout>
     );
 }

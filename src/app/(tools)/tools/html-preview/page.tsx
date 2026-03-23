@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import ToolPageLayout from "@/components/layout/ToolPageLayout";
+import ResizableLayout from "@/components/ui/ResizableLayout";
 
 const DEFAULT_CODE = `<!DOCTYPE html>
 <html>
@@ -31,6 +32,56 @@ export default function HtmlPreviewPage() {
         return () => clearTimeout(timeout);
     }, [code]);
 
+    const leftPanel = (
+        <div className="card" style={{ padding: "1rem", display: "flex", flexDirection: "column", height: "100%" }}>
+            <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "0.5rem" }}>
+                <span style={{ fontSize: "0.8125rem", fontWeight: 700, color: "var(--text-secondary)", textTransform: "uppercase" }}>
+                    Source Editor
+                </span>
+                <button onClick={() => setCode("")} className="btn btn-ghost btn-xs">Clear</button>
+            </div>
+            <textarea
+                className="input"
+                value={code}
+                onChange={(e) => setCode(e.target.value)}
+                placeholder="Write your HTML code here..."
+                style={{
+                    flex: 1,
+                    fontFamily: "var(--font-mono)",
+                    fontSize: "0.875rem",
+                    resize: "none",
+                    lineHeight: 1.5,
+                    padding: "1rem",
+                }}
+                spellCheck={false}
+            />
+        </div>
+    );
+
+    const rightPanel = (
+        <div className="card" style={{ padding: "1rem", display: "flex", flexDirection: "column", background: "white", overflow: "hidden", height: "100%" }}>
+            <div style={{ marginBottom: "0.5rem", borderBottom: "1px solid #e2e8f0", paddingBottom: "0.5rem", display: "flex", alignItems: "center", gap: "0.5rem" }}>
+                <div style={{ width: "10px", height: "10px", borderRadius: "50%", background: "#ef4444" }}></div>
+                <div style={{ width: "10px", height: "10px", borderRadius: "50%", background: "#eab308" }}></div>
+                <div style={{ width: "10px", height: "10px", borderRadius: "50%", background: "#22c55e" }}></div>
+                <span style={{ fontSize: "0.8125rem", color: "#94a3b8", marginLeft: "1rem", fontFamily: "var(--font-mono)" }}>
+                    Preview Sandbox
+                </span>
+            </div>
+            <iframe
+                srcDoc={srcDoc}
+                title="HTML Preview Sandbox"
+                sandbox="allow-scripts allow-modals allow-forms allow-popups"
+                style={{
+                    width: "100%",
+                    flex: 1,
+                    border: "none",
+                    background: "white",
+                }}
+            />
+        </div>
+    );
+
     return (
         <ToolPageLayout
             id="html-preview"
@@ -38,73 +89,9 @@ export default function HtmlPreviewPage() {
             description="Write HTML, CSS, and JS and see a live rendered preview in a real-time sandbox."
             icon="🖼️"
         >
-            <div
-                style={{
-                    display: "grid",
-                    gridTemplateColumns: "1fr 1fr",
-                    gap: "1.25rem",
-                    height: "calc(100vh - 350px)",
-                    minHeight: "500px",
-                }}
-                className="html-preview-grid"
-            >
-                {/* Editor */}
-                <div className="card" style={{ padding: "1rem", display: "flex", flexDirection: "column" }}>
-                    <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "0.5rem" }}>
-                        <span style={{ fontSize: "0.8125rem", fontWeight: 700, color: "var(--text-secondary)", textTransform: "uppercase" }}>
-                            Source Editor
-                        </span>
-                        <button onClick={() => setCode("")} className="btn btn-ghost btn-xs">Clear</button>
-                    </div>
-                    <textarea
-                        className="input"
-                        value={code}
-                        onChange={(e) => setCode(e.target.value)}
-                        placeholder="Write your HTML code here..."
-                        style={{
-                            flex: 1,
-                            fontFamily: "var(--font-mono)",
-                            fontSize: "0.875rem",
-                            resize: "none",
-                            lineHeight: 1.5,
-                            padding: "1rem",
-                        }}
-                        spellCheck={false}
-                    />
-                </div>
-
-                {/* Sandbox */}
-                <div className="card" style={{ padding: "1rem", display: "flex", flexDirection: "column", background: "white", overflow: "hidden" }}>
-                    <div style={{ marginBottom: "0.5rem", borderBottom: "1px solid #e2e8f0", paddingBottom: "0.5rem", display: "flex", alignItems: "center", gap: "0.5rem" }}>
-                        <div style={{ width: "10px", height: "10px", borderRadius: "50%", background: "#ef4444" }}></div>
-                        <div style={{ width: "10px", height: "10px", borderRadius: "50%", background: "#eab308" }}></div>
-                        <div style={{ width: "10px", height: "10px", borderRadius: "50%", background: "#22c55e" }}></div>
-                        <span style={{ fontSize: "0.8125rem", color: "#94a3b8", marginLeft: "1rem", fontFamily: "var(--font-mono)" }}>
-                            Preview Sandbox
-                        </span>
-                    </div>
-                    <iframe
-                        srcDoc={srcDoc}
-                        title="HTML Preview Sandbox"
-                        sandbox="allow-scripts allow-modals allow-forms allow-popups"
-                        style={{
-                            width: "100%",
-                            flex: 1,
-                            border: "none",
-                            background: "white",
-                        }}
-                    />
-                </div>
+            <div style={{ minHeight: "500px", height: "calc(100vh - 350px)" }}>
+                <ResizableLayout left={leftPanel} right={rightPanel} />
             </div>
-
-            <style>{`
-                @media (max-width: 900px) {
-                    .html-preview-grid {
-                        grid-template-columns: 1fr !important;
-                        height: auto !important;
-                    }
-                }
-            `}</style>
         </ToolPageLayout>
     );
 }

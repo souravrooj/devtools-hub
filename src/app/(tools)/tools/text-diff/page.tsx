@@ -3,6 +3,7 @@
 import { useState } from "react";
 import * as Diff from "diff";
 import ToolPageLayout from "@/components/layout/ToolPageLayout";
+import ResizableLayout from "@/components/ui/ResizableLayout";
 
 export default function TextDiffPage() {
     const [original, setOriginal] = useState("");
@@ -15,6 +16,44 @@ export default function TextDiffPage() {
         removed: diffResult.filter(part => part.removed).length,
     };
 
+    const leftPanel = (
+        <div className="card" style={{ padding: "1.25rem", height: "100%", display: "flex", flexDirection: "column" }}>
+            <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "0.75rem" }}>
+                <label style={{ fontSize: "0.8125rem", fontWeight: 600, color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "0.05em" }}>
+                    Original Text
+                </label>
+                <button onClick={() => setOriginal("")} className="btn btn-ghost btn-xs">Clear</button>
+            </div>
+            <textarea
+                className="input"
+                value={original}
+                onChange={(e) => setOriginal(e.target.value)}
+                placeholder="Paste original text here..."
+                rows={8}
+                style={{ flex: 1, fontFamily: "var(--font-mono)", fontSize: "0.8125rem", minHeight: "250px", resize: "none" }}
+            />
+        </div>
+    );
+
+    const rightPanel = (
+        <div className="card" style={{ padding: "1.25rem", height: "100%", display: "flex", flexDirection: "column" }}>
+            <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "0.75rem" }}>
+                <label style={{ fontSize: "0.8125rem", fontWeight: 600, color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "0.05em" }}>
+                    Modified Text
+                </label>
+                <button onClick={() => setModified("")} className="btn btn-ghost btn-xs">Clear</button>
+            </div>
+            <textarea
+                className="input"
+                value={modified}
+                onChange={(e) => setModified(e.target.value)}
+                placeholder="Paste modified text here..."
+                rows={8}
+                style={{ flex: 1, fontFamily: "var(--font-mono)", fontSize: "0.8125rem", minHeight: "250px", resize: "none" }}
+            />
+        </div>
+    );
+
     return (
         <ToolPageLayout
             id="text-diff"
@@ -23,55 +62,13 @@ export default function TextDiffPage() {
             icon="📊"
         >
             <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-                {/* Inputs Grid */}
-                <div
-                    style={{
-                        display: "grid",
-                        gridTemplateColumns: "1fr 1fr",
-                        gap: "1.25rem",
-                        marginBottom: "1.5rem",
-                    }}
-                    className="diff-input-grid"
-                >
-                    {/* Original */}
-                    <div className="card" style={{ padding: "1.25rem" }}>
-                        <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "0.75rem" }}>
-                            <label style={{ fontSize: "0.8125rem", fontWeight: 600, color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "0.05em" }}>
-                                Original Text
-                            </label>
-                            <button onClick={() => setOriginal("")} className="btn btn-ghost btn-xs">Clear</button>
-                        </div>
-                        <textarea
-                            className="input"
-                            value={original}
-                            onChange={(e) => setOriginal(e.target.value)}
-                            placeholder="Paste original text here..."
-                            rows={8}
-                            style={{ fontFamily: "var(--font-mono)", fontSize: "0.8125rem", minHeight: "200px" }}
-                        />
-                    </div>
-
-                    {/* Modified */}
-                    <div className="card" style={{ padding: "1.25rem" }}>
-                        <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "0.75rem" }}>
-                            <label style={{ fontSize: "0.8125rem", fontWeight: 600, color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "0.05em" }}>
-                                Modified Text
-                            </label>
-                            <button onClick={() => setModified("")} className="btn btn-ghost btn-xs">Clear</button>
-                        </div>
-                        <textarea
-                            className="input"
-                            value={modified}
-                            onChange={(e) => setModified(e.target.value)}
-                            placeholder="Paste modified text here..."
-                            rows={8}
-                            style={{ fontFamily: "var(--font-mono)", fontSize: "0.8125rem", minHeight: "200px" }}
-                        />
-                    </div>
+                {/* Inputs Resizable */}
+                <div style={{ marginBottom: "2rem" }}>
+                    <ResizableLayout left={leftPanel} right={rightPanel} minWidth={30} />
                 </div>
 
                 {/* Diff Result */}
-                <div className="card" style={{ padding: "1.5rem", minHeight: "300px" }}>
+                <div className="card animate-fade-in" style={{ padding: "1.5rem", minHeight: "300px", animationDelay: "0.1s" }}>
                     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1.25rem" }}>
                         <h3 style={{ fontSize: "1rem", fontWeight: 700 }}>Comparison Result</h3>
                         <div style={{ display: "flex", gap: "1rem", fontSize: "0.8125rem" }}>
@@ -93,7 +90,7 @@ export default function TextDiffPage() {
                     >
                         {original || modified ? (
                             diffResult.map((part, i) => {
-                                const color = part.added ? "rgba(16, 185, 129, 0.2)" : part.removed ? "rgba(239, 68, 68, 0.2)" : "transparent";
+                                const color = part.added ? "rgba(16, 185, 129, 0.15)" : part.removed ? "rgba(239, 68, 68, 0.15)" : "transparent";
                                 const prefix = part.added ? "+" : part.removed ? "-" : " ";
                                 return (
                                     <span
@@ -121,14 +118,6 @@ export default function TextDiffPage() {
                     </div>
                 </div>
             </div>
-
-            <style>{`
-                @media (max-width: 768px) {
-                    .diff-input-grid {
-                        grid-template-columns: 1fr !important;
-                    }
-                }
-            `}</style>
         </ToolPageLayout>
     );
 }

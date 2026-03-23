@@ -37,60 +37,21 @@ export default function ToolPageLayout({
     }, [id]);
 
     return (
-        <div style={{ padding: "2rem 0 3rem" }}>
+        <div className="tool-page-wrapper">
             <div className="container">
                 {/* Tool header */}
-                <div
-                    className="animate-fade-in"
-                    style={{
-                        display: "flex",
-                        alignItems: "flex-start",
-                        gap: "1rem",
-                        marginBottom: "2rem",
-                    }}
-                >
-                    <div
-                        style={{
-                            width: "52px",
-                            height: "52px",
-                            borderRadius: "var(--radius-md)",
-                            background: "var(--accent-muted)",
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "center",
-                            fontSize: "28px",
-                            flexShrink: 0,
-                        }}
-                    >
+                <header className="tool-header animate-fade-in">
+                    <div className="tool-header-icon">
                         {icon}
                     </div>
-                    <div>
-                        <h1
-                            style={{
-                                fontSize: "1.5rem",
-                                fontWeight: 800,
-                                color: "var(--text-primary)",
-                                margin: "0 0 0.25rem",
-                                letterSpacing: "-0.03em",
-                            }}
-                        >
-                            {title}
-                        </h1>
-                        <p
-                            style={{
-                                fontSize: "0.9375rem",
-                                color: "var(--text-secondary)",
-                                margin: 0,
-                                lineHeight: 1.5,
-                            }}
-                        >
-                            {description}
-                        </p>
+                    <div className="tool-header-content">
+                        <h1 className="tool-title">{title}</h1>
+                        <p className="tool-description">{description}</p>
                     </div>
-                </div>
+                </header>
 
                 {/* Tool content */}
-                <div className="animate-fade-in" style={{ animationDelay: "0.05s" }}>
+                <div className="tool-content-area animate-fade-in" style={{ animationDelay: "0.05s" }}>
                     <ErrorBoundary fallbackTitle={`Error loading ${title}`}>
                         {children}
                     </ErrorBoundary>
