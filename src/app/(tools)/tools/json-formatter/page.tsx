@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import ToolPageLayout from "@/components/layout/ToolPageLayout";
 import CopyButton from "@/components/ui/CopyButton";
