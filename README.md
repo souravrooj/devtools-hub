@@ -239,11 +239,13 @@ All environment variables are documented in [`.env.example`](.env.example).
 
 ## 🗺️ Roadmap
 
+We have a clear vision for the future of DevTools Hub. See our **[Full Future Roadmap](./FUTURE_ROADMAP.md)** for detailed plans on:
+
 - [x] v2.0 tools (Regex, UUID, Timestamp)
 - [x] Advanced Features (Favorites, Recents, Stats)
 - [x] Community Portal (Suggest a Tool)
-- [x] Public API Documentation
-- [ ] v3.0 (User Accounts & Cloud Sync)
+- [ ] **v3.0 Strategic Vision** (Command Palette, PWA, Offline mode)
+- [ ] **Developer Ecosystem** (API Documentation, SQL Formatter)
 
 ---
 
